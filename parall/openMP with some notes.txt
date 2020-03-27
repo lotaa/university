@@ -1,0 +1,51 @@
+#include<iostream>
+#include<omp.h>
+#include<ctime>
+using namespace std;
+
+#pragma omp threadprivate(threadNumber) // initialize id varaible for every thread that will be spawned
+/*
+to solve repeating getting id command in both parallel regions
+it must be used globally, i.e . not inside the main function or any other function
+*/
+
+int main()
+{
+	int numberOfThreads;
+	clock_t t1, t2;
+	double wt1, wt2;
+	t1 = clock();
+	wt1 = omp_get_wtime();
+	#pragma omp parallel //private(threadNumber)
+	{
+		int threadNumber;// define inside the parallel region to be private(prevent the race condition) 
+						 // which mean when a (shared) variable is, at the same time, accessed by different threads
+						 // or type private(threadNumber) next to #pragma omp parallel
+		threadNumber = omp_get_thread_num();
+		/*
+		if (threadNumber == 0)
+		{
+			numberOfThreads = omp_get_num_threads();
+		}
+		#pragma omp barrier //wait untill the thread hit this barrier and then continue
+		*/
+		#pragma omp single //one thread that will process those lines
+		{
+			numberOfThreads = omp_get_num_threads();
+		}
+
+		for (int i = 0; i < numberOfThreads; i++)
+		{
+			cout << "hello from thread : " << threadNumber <<" out of : "<<numberOfThreads<<endl;
+		}
+	}
+	t2 = clock();
+	wt2 = omp_get_wtime();
+	cout << "total CPU time = " << (double)(t2 - t1)/CLOCKS_PER_SEC << endl;
+	cout << "total world time = " <<wt2 - wt1<< endl;
+
+	return 0;
+}
+
+//#pragma omp critical(atomic) // which mean no thread can acess this variable while another thread use it
+// you can use reduction to solve all the problems  ex: reduction(+:sum)

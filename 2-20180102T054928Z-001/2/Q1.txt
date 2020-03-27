@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+
+void insertArr(int *mat, int *size);
+void printArr(int *mat, int *size, bool rev = false);
+void Swap(int *_X, int *_Y);
+void sortArr(int *mat, int *size);
+
+void main() {
+	int arr[50];
+	int dim;
+	int *pArr = arr;
+	int *pDim = &dim;
+	cout << "Enter size of array: ";
+	cin >> *pDim;
+	insertArr(pArr, pDim);
+	printArr(pArr, pDim, true);
+	printArr(pArr, pDim);
+	sortArr(pArr, pDim);
+	printArr(pArr, pDim);
+	system("pause");
+}
+
+void insertArr(int *mat, int *size) {
+	cout << "Enter array: ";
+	for (int i = 0; i < *size; i++) {
+		cin >> *(mat+i);
+	}
+}
+
+void printArr(int *mat, int *size, bool rev) {
+	if (rev) {
+		for (int i = *size-1; i >= 0; i--) {
+			cout << *(mat + i) << " ";
+		}
+	}
+	else {
+		for (int i = 0; i < *size; i++) {
+			cout << *(mat + i) << " ";
+		}
+	}
+	cout << endl;
+}
+
+void Swap(int *_X, int *_Y) {
+	*_X += *_Y;
+	*_Y = *_X - *_Y;
+	*_X -= *_Y;
+}
+
+void sortArr(int *mat, int *size) {
+	for (int i = 0; i < *size-1; i++) {
+		for (int j = i+1; j < *size; j++) {
+			if (*(mat + i) > *(mat + j)) Swap((mat + i), (mat + j));
+		}
+	}
+}

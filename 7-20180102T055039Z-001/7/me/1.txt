@@ -1,0 +1,48 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+class pologon{
+protected :
+	float lenght ;
+public :
+	pologon (){
+		cout << " ent len \n " ;
+		cin >> lenght ;
+	}
+};
+
+class tringle : protected pologon {
+private:
+	float height ;
+public :
+	tringle (){
+
+		cout << " ent hei \n " ;
+		cin >> height ;
+	}
+	float area_t () {
+		return .5*height*lenght;
+	}
+};
+
+class rect : protected pologon {
+private:
+	float width ;
+public :
+	rect (){
+		cout << " ent hei \n " ;
+		cin >> width ;
+	}
+	float area_r () {
+		return width*lenght;
+	}
+};
+void main(){
+	cout << " /////////////tringlre///////////// \n " ;
+	tringle t ;
+	cout << " area of tr is " << t.area_t()<< " \n " ;
+	cout << " ///////////rect//////////// \n " ;
+	rect r ;
+	cout << " ar of tr is " << r.area_r()<< " \n " ;
+	system("pause");
+}

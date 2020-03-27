@@ -1,0 +1,12 @@
+ssn,name,address,year,birhdate,phone,sex,class_no
+12345678912345,"ahmed mohamed","12st shobra",1,2010-12-21,22222222,male,1/5
+1234567891111,"mohamed ahmed","23st massra",1,2010-11-12,21111111,male,1/3
+1234567892222,"aya mohamed","2st kholosy",2,2009-02-23,23222222,female,2/5
+1234567893333,"marwa ahmed","19st massra",3,2008-03-12,24555555,female,3/5
+1234567894444,"omnia hossn","3st shobra",3,2008-04-15,33665544,female,3/2
+1234567895555,"marwa yousif","3st kholosy",4,2007-05-25,32654987,female,4/2
+1234567896666,"marina kamel","16st shobra",4,2007-06-30,33222222,female,4/3
+1234567897777,"wael ahmed","10 massra",1,2010-08-15,32156478,male,1/5
+1234567898888,"mohamed hashem ","10 massra",2,2009-09-24,332226655,male,2/5
+123456789999,"yasser ahmed","45st shobra",3,2008-05-06,222221112,male,3/4
+NULL,,NULL,NULL,NULL,,NULL,NULL

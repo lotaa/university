@@ -1,0 +1,31 @@
+clear;
+ clc;
+ %%%%%%%%%%% Q1,2 %%%%%%%%%%%
+%  M=randi([0,255],500,500,'uint8');
+%  I=randi([0,1],500,500,'uint8')*255;
+%  
+% subplot(121), imshow(M),title("grayscale image");
+% subplot(122), imshow(I),title("black and white image");
+
+%%%%%%%%%%%%%%%%%%% Q3 %%%%%%%%%%%%%
+I=randi([0,255],500,500,3,'uint8');
+imshow(I)
+
+%%%%%%%%%%%%%%%%%%% Q4 %%%%%%%%%%%%%%5
+%  
+% I=imread('cameraman.tif');
+% [r,c]=size(I);
+% i=1;
+% j=1;
+% image_fin=zeros(r/2,c/2);
+% for x=1:2:r
+%     for y=1:2:c
+%       image_fin(i,j)=I(x,y);
+%       j=j+1;
+%     end
+%     i=i+1;
+%     j=1;
+% end
+% image_fin=uint8(image_fin);
+% subplot(121),imshow(I),title("original");
+% subplot(122),imshow(image_fin);

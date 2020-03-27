@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		h3 {color:green}
+		</style>
+		<script type="text/javascript">
+					
+			function show() 
+			{
+				var nn;
+				nn = document.getElementById("n").value;
+				if (nn=="")
+					document.getElementById("error").innerHTML = "<h3> You should enter your name </h2>";
+				else
+					{
+						document.getElementById("error").innerHTML = "";
+						window.alert ("Thanks for regestration " + nn);
+					}
+			}
+		
+
+		</script>
+	
+	</head>
+	
+	<body> 
+		<h1>Registration form 		</h1>
+		<p id="error">		</p>
+		
+		<form>
+		Enter your name: <input type="input" name="name" id="n"> </input>
+		<br>
+		Enter your eamil: <input type="input" name="email"> </input>
+		<br>
+		<input type="button" onclick="show()" value ="Check Myname"> </input>
+		</form>
+		
+	</body>
+</html>

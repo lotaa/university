@@ -1,0 +1,91 @@
+<!DOCTYPE html>	
+<html>
+<head>
+
+<title>sh5</title>
+
+<script>
+
+function convert()
+   {
+		var x=document.getElementsByTagName("h1");
+		for(i=0;i<x.length;i++)
+		{
+			x[i].innerHTML="new one "
+		}
+   }
+	
+var tasks=[];
+function student(id,name,program)
+{
+	this.id=id
+	this.name=name
+	this.program=program
+	this.disp=function(){return "  ID :  "+this.id+"     Name : "+this.name+"    Program :  "+this.program;}
+}
+
+function insert() {
+	x=document.getElementById("id").value
+	y=document.getElementById("name").value
+	z=document.getElementById("program").value
+	var w=new student(x,y,z)
+	tasks.push(w);
+	
+	var a=confirm("do you want another element")
+	if(a==false)
+	{
+		document.getElementById("ins").style.visibility="hidden";
+	}
+	else 
+	{
+		document.getElementById("id").value=" ";
+		document.getElementById("name").value=" ";
+	}
+	
+   }
+
+function show(){
+   var res
+  res="<table border=2><tr><td>ID</td><td>NAME</td><td>PROGRAM</td></tr>"
+		for(i=0;i<tasks.length;i++)
+		{
+			res+="<tr><td>"+tasks[i].id+"</td><td>"+tasks[i].name+"</td><td>"+tasks[i].program+"</td></tr>"
+		}
+		document.getElementById("1").innerHTML=res+"</table>"
+	
+   }
+   
+   
+   
+</script>
+
+</head>
+
+<body>
+
+<p>Click the button to display an alert box.</p>
+
+<h1>asim</h1>
+<h1>issam</h1>
+<h1>farhat</h1>
+<p id="1"></p>
+<button onclick="convert()">convert</button>
+<br><br><br>
+    ID: <input type="text" id="id">&nbsp&nbsp&nbsp
+	NAME: <input type="text" id="name">&nbsp&nbsp&nbsp
+	PROGRAM : <select id="program">
+					<option value="cs">CS</option>
+					<option value="cs-math">CS-MATH</option>
+					<option value="cs-static">CS-STATIC</option>
+					<option value="cs-physics">CS-PHYSICS</option>
+			  </select>
+	<br><br><br>
+	<button onclick="insert()" id="ins">insert</button>&nbsp&nbsp&nbsp
+	<button onclick="show()">show</button>
+	<br><br><br>
+
+
+</body>
+</html>
+
+

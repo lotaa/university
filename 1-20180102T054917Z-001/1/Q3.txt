@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int collect(int arr[], int size, char s);
+
+void main(){
+	int arr[100], n;
+	char a;
+	cout << "\nHello, enter size of array: ";
+	cin >> n;
+	cout << "Enter values of array: ";
+	for (int i = 0; i < n; i++) cin >> arr[i];
+	cout << "Enter op:"; cin >> a;
+	cout << collect(arr, n, a) << endl;
+	system("pause");
+}
+
+int collect(int arr[], int size, char s){
+	int sum=0;
+	switch(s){
+	case '+':
+		for(int i=0;i<size;i++) if(arr[i]>0) sum+=arr[i];
+		return sum;
+	case '-':
+		for(int i=0;i<size;i++) arr[i]<0?sum+=arr[i]:sum+=0;
+		return sum;
+	default: 
+		cout<<"wrong op\nTake sum of array for no reason:";
+		for (int i = 0; i < size; i++) sum += arr[i];
+		return sum;
+	}
+}

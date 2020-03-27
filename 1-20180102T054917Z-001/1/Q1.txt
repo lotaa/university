@@ -1,0 +1,56 @@
+#include <iostream>
+
+struct Timey {
+	int h, m, s;
+}time;
+
+using namespace std;
+
+void setTime();
+void disTime();
+void incTime();
+void fixTime();
+
+void main() {
+	setTime();
+	disTime();
+	incTime();
+	disTime();
+	system("pause");
+}
+
+void setTime() {
+	cout<<"Hours: ";
+	cin >> time.h;
+	cout<<"Minutes: ";
+	cin >> time.m;
+	cout<<"Seconds: ";
+	cin >> time.s;
+	fixTime();
+}
+
+void disTime() {
+	cout<< "time\t" << time.h << ":" << time.m << ":" << time.s << endl;
+}
+
+void incTime() {
+	int sec;
+	cout<<"Increase time (in seconds): ";
+	cin>>sec;
+	time.h += sec / 3600;
+	sec = sec % 3600;
+	time.m += sec / 60;
+	time.s += sec % 60;
+	fixTime();	
+}
+
+void fixTime(){
+	while(time.s >= 60){
+		time.m++;
+		time.s-=60;
+	}
+	while(time.m >= 60){
+		time.h++;
+		time.m-=60;
+	}
+}

@@ -1,0 +1,42 @@
+#include <iostream>
+#include <math.h>
+
+//function prototypes
+float f1();
+float f2();
+
+//namespaces
+using namespace std;
+
+void main(){
+	cout<<f1()<<endl;
+	cout<<f2()<<endl;
+	system("pause");
+}
+
+//functions
+float f1(){
+	int x,n;
+	float sum, fact=1;
+	cout<<"x: ";cin>>x;
+	cout<<"n: ";cin>>n;
+	sum = x;
+	for(int i = 2; i<=n; i++){
+		fact*=i;
+		sum+=(x+i)/fact;
+	}
+	return sum;
+}
+
+float f2(){
+	int x, n, fact=1;
+	float sum;
+	cout<<"x: ";cin>>x;
+	cout<<"n: ";cin>>n;
+	sum = x;
+	for(int i = 2; i<=n; i++){
+		fact+=i;
+		sum+= (i%2==0?(-1):(1)) * pow(x,float(i)) / fact;
+	}
+	return sum;
+}

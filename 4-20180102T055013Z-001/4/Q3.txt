@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+class Time{
+	int hour,min,sec;
+	char DN;
+public:
+	Time(int hr=0, int mn=0, int sc=0):hour(hr), min(mn),sec(sc){
+		if(hour>=12) DN = 'P';
+		else DN = 'A';
+	}
+	Time(Time & obj): hour(obj.hour), min(obj.min), sec(obj.sec){}
+	
+	void set(){
+		cout<<"h:m:s: "; cin>>hour>>min>>sec;
+	}
+	void print24(){
+		cout<<"Time: "<<hour<<":"<<min<<":"<<sec<<endl;
+	}
+	void print12(){
+		if(hour>=12) DN = 'P';
+		else DN = 'A';
+		cout<<"Time: "<<((hour>12)?hour-12:hour)<<":"<<min<<":"<<sec<<" "<<DN<<"M"<<endl;
+	}
+	void print24() const{
+		cout<<"Time: "<<hour<<":"<<min<<":"<<sec<<endl;
+	}
+	void print12() const{
+		cout<<"Time: "<<((hour>12)?hour-12:hour)<<":"<<min<<":"<<sec<<" "<<DN<<"M"<<endl;
+	}
+};
+
+void main(){
+	const Time T1(23,22,11),T2(15,14,30);
+	Time T3(11,15,30),T4(T3);
+	T4.set();
+	T1.print12();
+	T1.print24();
+	T2.print12();
+	T2.print24();
+	T3.print12();
+	T3.print24();
+	T4.print12();
+	T4.print24();
+	system("pause");
+}

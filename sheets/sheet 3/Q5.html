@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript">
+        var ar = new Array();
+        var i =0;
+        function insert()
+        {
+            var x = document.getElementById("n").value;
+            ar[i++] = x;            
+            document.getElementById("msg").innerHTML=" Inserting the value " + x + " array length now = " + ar.length;
+            document.getElementById("n").value = "";
+        }
+        function disp()
+        {
+            var result ="";
+            for (j=0 ; j<ar.length ; j++)
+                result += ar[j] + ", ";
+            document.getElementById("out").value = result;
+        }
+        function dispn(n)
+        {
+            var result ="";
+			if (n<=ar.length)
+            for (j=0;j<n;j++)
+               { result += ar[j] + ", ";
+			    }
+            
+			
+            else
+                result = "n exceed length";
+           
+                 document.getElementById("out").value = result;
+			
+        }        
+    </script>
+    </head>
+    <body>
+        <form>
+            <input type="number" id="n">
+            <input type="button" onclick="insert()" value="insert">
+            <input type="button" onclick="disp()" value="show">            
+            <input type="button" onclick="dispn(5)" value="displayn">            
+            <br>
+            <p id ="msg">  </p>
+            <br>
+            <output id="out">
+            
+            </output>
+    </form>
+    </body>
+</html>

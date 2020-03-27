@@ -1,0 +1,33 @@
+#include <iostream>
+#include<vector>
+#include<ctime>
+
+using namespace std;
+
+
+int main()
+{
+    int no = 100000;
+    clock_t t1,t2;
+
+    vector<int> x,y,res ;
+    for(int i=0; i<no; i++)
+    {
+        x.push_back(1);
+        y.push_back(1);
+    }
+
+    t1 = clock();
+    for(int i=0; i<no; i++)
+    {
+        res.push_back( x.at(i)*y.at(i) );
+    }
+    t2 = clock();
+    for(int i=0; i<no; i++)
+    {
+        cout<<"vec res at "<<i<<" = "<<res.at(i)<<endl;
+    }
+    cout<<"total time spend = "<<(double)(t2-t1)<<endl;
+
+    return 0;
+}

@@ -1,0 +1,50 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+class X_axis {
+protected:
+	float X;
+public:
+	X_axis(float x = 0) :X(x) {}
+};
+
+class Y_axis {
+protected:
+	float Y;
+public:
+	Y_axis(float y = 0) :Y(y) {}
+};
+
+class Point_3d :public X_axis, Y_axis {
+private:
+	float Z;
+public:
+	Point_3d(float x = 0, float y = 0, float z = 0) :X_axis(x), Y_axis(y), Z(z) {}
+
+	float norm() {
+		return sqrt(X*X + Y*Y + Z*Z);
+	}
+
+	void get() {
+		cout << "X:" << X << "Y: " << Y << "Z: " << Z << endl;
+	}
+
+	friend float distance(Point_3d P1, Point_3d P2) {
+		return sqrt(pow((P2.X - P1.X), 2) + pow((P2.Y - P1.Y), 2) + pow((P2.Z - P1.Z), 2));
+	}
+};
+
+
+
+void main() {
+	Point_3d point1(5, 4, 6);
+	Point_3d point2(4, 10, 15);
+
+	cout << "norm Point1: " << point1.norm() << endl;
+	cout << "norm Point2: " << point2.norm() << endl;
+	cout << "norm between Point1 and Point2: " << distance(point1, point2) << endl;
+
+
+	system("pause");
+}

@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class SData{
+private:
+	string address,name;
+	struct Bdate{
+		int d,m,y;
+	}bd;
+public:
+	SData(string n="name", string a="address"){
+		name=n;
+		address=a;
+		bd.d=1;
+		bd.m=1;
+		bd.y=1990;
+	}
+	void read(){
+		cout<<"Name: "; getline(cin, name);
+		cout<<"Address: "; getline(cin, address);
+		cout<<"Enter Birthdate: "; cin>>bd.d>>bd.m>>bd.y;
+	}
+	char validBD(){
+		if ((bd.d < 1 || bd.d > 31) && (bd.m < 1 || bd.m > 12) && (bd.m < 1900 || bd.m > 2020)) return 'n'; 
+		return'y';
+	}
+	void Print(){
+		cout<<"Name: "<<name;
+		cout<<"Address: "<<address;
+		cout<<"Enter Birthdate: "<<bd.d<<"/"<<bd.m<<"/"<<bd.y;
+		cout<<endl;
+	}
+};
+
+void main(){
+	SData Omar;
+	Omar.read();
+	Omar.Print();
+	cout<<Omar.validBD()<<endl;
+	system("pause");
+}

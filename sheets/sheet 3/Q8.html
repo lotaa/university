@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript">
+        var ar = new Array();
+        var i =0;
+        function drawTable()
+        {
+            var row = document.getElementById("r").value;
+            var col = document.getElementById("c").value;
+            var result = "<table border = 1>";
+            for (i=1 ; i<=row ; i++)
+                {
+                    result += "<tr>"
+                    for (j=1 ; j<=col ; j++)
+                        result += "<td>" + i + " </td>";
+                    result += "</tr>";
+                }
+            result += "</table>";
+            document.getElementById("outTable").innerHTML = result;
+        }
+
+        
+        function mat()
+        {
+            var row = document.getElementById("r").value;
+            var col = document.getElementById("c").value;
+            var result = "<form>"
+            result += "<table border>";
+            for (i=1 ; i<=row ; i++)
+                {
+                    result += "<tr>"
+                    for (j=1 ; j<=col ; j++)
+                        result += "<td> <input type=\"number\"> </td>";
+                   result += "</tr>";  
+                }
+            result += "</table>";
+            result += "</form>"
+            document.getElementById("outTable").innerHTML = result;
+        }
+
+    </script>
+    </head>
+    <body>
+        <form>
+            Enter No of rows: <input type="number" id="r">
+            Enter No of columns: <input type="number" id="c">
+            <input type="button" onclick="drawTable()" 
+                   value="Table">
+            <input type="button" onclick="mat()" value="draw Matrix">            
+            <br>
+            <p id ="outTable">  </p>
+            <p id ="outMatrix">  </p>
+            <br>
+    </body>
+</html>

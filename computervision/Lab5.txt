@@ -1,0 +1,80 @@
+clear;
+ clc;
+%%%%%%%%%%%%%%%  Q1 %%%%%%%%%%%%
+ 
+% I=imread('cameraman.tif');
+% [r,c]=size(I);
+% freq=zeros(r,c);
+% for i=1:r
+%     for j=1:c
+%         freq(I(i,j)+1)=freq(I(i,j)+1)+1;
+%     end
+% end
+% 
+% m=freq ./r*c;
+% cdf=cumsum(m);
+% S=round(255*cdf);
+% w=zeros(r,c);
+% for i=1:r
+%     for j=1:c
+%         w(i,j)=S(I(i,j)+1);
+%         
+%     end
+% end
+% uint8(w);
+% subplot(1,2,1)
+% hist(w);
+% subplot(1,2,2);
+% imshow(w);
+
+%%%%%%%%%%%%%%%% Q2 %%%%%%%%%%%%%%%%%
+X=imread('cameraman.tif');
+Y1=bitget(X,1);
+Y2=bitget(X,2);
+Y3=bitget(X,3);
+Y4=bitget(X,4);
+Y5=bitget(X,5);
+Y6=bitget(X,6);
+Y7=bitget(X,7);
+Y8=bitget(X,8);
+Y=Y8+Y7+Y6+Y5;
+X1=X-Y;
+figure,
+subplot(3,3,1);imshow(logical(Y1));title('Bit plane 0');
+subplot(3,3,2);imshow(logical(Y2));title('Bit plane 1');
+subplot(3,3,3);imshow(logical(Y3));title('Bit plane 2');
+subplot(3,3,4);imshow(logical(Y4));title('Bit plane 3');
+subplot(3,3,5);imshow(logical(Y5));title('Bit plane 4');
+subplot(3,3,6);imshow(logical(Y6));title('Bit plane 5');
+subplot(3,3,7);imshow(logical(Y7));title('Bit plane 6');
+subplot(3,3,8);imshow(logical(Y8));title('Bit plane 7');
+figure,
+subplot(3,3,1);imshow(X);
+subplot(3,3,2);imshow(logical(Y));
+subplot(3,3,3);imshow(uint8(X1));
+
+%%%%%%%%%%%%%%%%% Q3 %%%%%%%%%%%%%%%%
+
+a = imread('football.jpg');
+b = rgb2gray(a);
+[m,n] = size(b);
+
+c = zeros(m,n);
+% initialing the for loop
+for i = 1:m
+    for j = 1:n
+        % use the condition 
+        if b(i,j) >= 227  % try with defferent intensity levels in the range from 227 to 245 for better understanding
+            c(i,j) = 255;
+        else
+            c(i,j) = 0;
+        end
+    end
+end
+% analyzing the above gray level image histogram using "imhist"
+
+subplot(121),imshow(b); title('input image in gray level');
+
+subplot(122),imhist(b);title('histogram of the input image at gray level');
+figure,
+imshow(c); 

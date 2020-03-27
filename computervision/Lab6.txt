@@ -1,0 +1,64 @@
+clear;
+ clc;
+
+I=imread('cameraman.tif');
+%%%%%%%%%%%%%%%% Q1 %%%%%%%%%%
+%J=imnoise(I,'salt & pepper',0.02);
+% K=medfilt2(J,[3,3]);
+% subplot(221),imshow(I);
+% subplot(222),imshow(J);
+% subplot(223),imshow(K);
+% ////////////////////////// another soln./////
+% [r,c]=size(J);
+% M=zeros(r+2,c+2);
+% M(2:r+1,2:c+1)=J;
+% for i=2:r+1
+%     for j=2:c+1
+%         F=M(i-1:i+1,j-1:j+1);
+%         M(i,j)=median(median(F));
+%     end
+% end
+% 
+% OUT=uint8(M(2:r+1,2:c+1));
+% subplot(221),imshow(I);
+% subplot(222),imshow(J);
+% subplot(223),imshow(OUT);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Q2 Laplas%%%%
+% [r,c]=size(I);
+%  M=zeros(r+2,c+2);
+%  M(2:r+1,2:c+1)=I;
+%  D=zeros(r+2,c+2);
+%  for i=2:r+1
+%      for j=2:c+1
+%         D(i,j)=M(i-1,j-1)+M(i-1,j)+M(i-1,j+1)+M(i,j-1)-8*M(i,j)+M(i,j+1)+M(i+1,j-1)+M(i+1,j)+M(i+1,j+1);
+%         
+%          
+%      end
+%  end
+%  M=M-D;
+%  OUT=uint8(M(2:r+1,2:c+1));
+%  subplot(121),imshow(I);
+%  subplot(122),imshow(OUT);
+ %%%%%%%%%%%%%%%%%%%%%% Q2 sobel%%%%%%%
+ 
+%  [r,c]=size(I);
+%  M=zeros(r+2,c+2);
+%  M(2:r+1,2:c+1)=I;
+%  D=zeros(r+2,c+2);
+%  
+%  for i=2:r+1
+%      for j=2:c+1
+%        D(i,j)=abs((M(i+1,j-1)+ 2*M(i+1,j)+ M(i+1,j+1))- (M(i-1,j-1)+  2*M(i-1,j)+M(i-1,j+1)))+abs((M(i-1,j+1)+ 2*M(i,j+1)+ M(i+1,j+1))- (M(i-1,j-1)+  2*M(i,j-1)+M(i+1,j-1)));
+%      end
+%  end
+%  
+%  M=M-D;
+%  OUT=uint8(M(2:r+1,2:c+1));
+%  subplot(121),imshow(I);
+%  subplot(122),imshow(OUT);
+%  
+
+%%%%%%%%%%%%%%%%%%%%%% Q3 2 %%%%%%%%%%%%%%%%%%%
+fin=edge(I,'sobel');
+subplot(121),imshow(I);
+ subplot(122),imshow(fin)

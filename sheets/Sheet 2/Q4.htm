@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+ 
+	#btn{
+	width:150px;
+	height:40px;
+	font-size:20px;}
+</style>
+		<head><script type="text/javascript">
+			function fx() 
+				{ 
+					var x;
+					x = document.getElementById("x").value;  //to conevrt it to number not text
+					 
+					if (x<0)
+						result = Math.pow(x,2);
+					else if (x>=1 && x<20)
+						result =Math.pow(x,2)-4;
+					else if (x>=20 && x<35)
+						result =Math.sqrt(x-4)/(2*x);	
+					else
+						result='undefined'
+						
+					document.getElementById("s").innerHTML = result;  
+				}
+			
+			 
+		</script></head>
+<body> 
+			<table id="calc"   style="background-color:powderblue;color:blue;"  >
+				<tr><th colspan=2 > <h1>F(x)</h1> </th></tr>
+				
+				<tr><th colspan=2 > <img src='fun.png'></img></th></tr>
+				<tr>
+					<td> x</td> <td><INPUT type="number" id="x" value=15></td>
+				</tr>
+				
+				<tr>
+					<td> f(x) </td> <td><OUTPUT  type="number" id="s" ></output></td>  
+					
+				</tr>
+				<tr style="background-color:#fdc;color:blue; text-align:center">
+				   
+					<td colspan=2> <input id="btn" type="button" onclick="fx()" value="Calculate" style='background-color:blue;color:yellow'></input> </td>
+					
+				</tr>
+				
+
+		
+</body>
+</html>

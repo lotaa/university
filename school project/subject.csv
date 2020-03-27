@@ -1,0 +1,8 @@
+name,no,min_degree,max_degree
+arabic,1,30,60
+math,2,25,50
+english,3,25,50
+scince,4,20,40
+art,5,15,30
+comp,6,15,30
+religion,7,15,30

@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+<head>
+<title>sheet 4</title>
+
+<script>
+
+function dash()
+{
+	var s=document.getElementById("1").value;
+	for(i=0;i<s.length;i++)
+	{
+		if(s[i]%2!=0)
+		{
+			res+=s[i];
+		}
+		else if(s[i]%2==0)
+		{
+			if(s[i+1]%2==0)
+			res+=s[i]+"-";
+			else if(s[i+1]%2!=0)
+			{
+				res+=s[i];
+			}
+		}
+	}
+	document.getElementById("2").innerHTML=res;
+}
+
+function secondindexof()
+{
+    s=document.getElementById("1").value
+	x=document.getElementById("5").value
+	flag=0;
+	for(i=0;i<s.length;i++)
+	{
+		if(s[i]==x)flag++;
+		if(flag==2)return document.getElementById("2").innerHTML=i;
+	}
+}
+
+function find_max(x)
+{
+	var max=0,o,indofmax;
+	for(k=0;k<x.length;k++)
+	{
+		if(x[k]>max)
+		{
+			max=x[k];
+			o=k;
+		}
+	}
+	return o;
+}
+
+function find_mmax(x)
+{
+	var max=0,o,indofmax;
+	for(k=0;k<x.length;k++)
+	{
+		if(x[k]>max)
+		{
+			max=x[k];
+			o=k;
+		}
+	}
+	return max;
+}
+
+function mostfrequentitem ()
+{
+	var s=document.getElementById("1").value;
+	var y=[];
+	for(i=0;i<s.length;i++)
+	{
+		var cont=-1;
+		for(j=0;j<s.length;j++)
+		{
+			if(s[i]==s[j])
+			{
+				cont++;
+			}
+		}
+		y[i]=cont;
+	}
+	var q=find_max(y);
+	var w=find_mmax(y);
+	document.getElementById("2").innerHTML="the max element is : "+s[q]+"  and the no of its repeted is  : "+ w +" ";
+}
+
+function shift(x,j)
+{
+	for(i=j;j<x.length;i++)
+	{
+		x[j]=x[j+1];
+	}
+}
+	
+function removedublicate()
+{
+	var s=document.getElementById("1").value;
+	for(i=0;i<s.length;i++)
+	{
+		for(j=i+1;j<s.length;j++)
+		{
+			if(s[i]==s[j])
+			{
+				 s=s.replace(s[j],"")
+			}			
+		}
+	}
+	
+	document.getElementById("2").innerHTML=s;
+}
+
+function con()
+{
+	x=document.getElementById("t1").innerHTML;
+	y=document.getElementById("t2").innerHTML;
+	z=concat(x,y);
+}
+
+var library = [
+{ author: 'Bill Gates', title: 'The Road Ahead', libraryID: 1254},
+{ author: 'Steve Jobs', title: 'Walter Isaacson', libraryID: 4264},
+{ author: 'Suzanne Collins', title: 'Mockingjay', libraryID: 3245} ];
+
+function pr()
+{
+	res="<table border=6>"
+	for(i=0 ; i<library.length ;i++)
+	{
+		res+="<tr><td>"+library[i].author+"</td><td>"+library[i].title+"</td><td>"+library[i].libraryID+"</td></tr>";
+	}
+	res+="</table>";
+	document.getElementById("e").innerHTML=res;
+}
+
+function sortt()
+{
+	res="<table border=6>"
+	for(i=0 ; i<library.length ;i++)
+	{
+		res+="<tr><td>"+library[i].author+"</td><td>"+library[i].title+"</td><td>"+library[i].libraryID+"</td></tr>";
+	}
+	res+="</table>";
+	document.getElementById("e").innerHTML=res;
+
+	for(i=0 ; i<library.length-1 ;i++)
+	{
+		for(j=i+1 ; j<library.length ;j++)
+		{
+			if(library[i].title[1]<library[j].title[1])
+			{
+				q=library[i];
+				library[i]=library[j]
+				library[j]=q;
+			}
+		}
+	}
+
+	
+	ress="<table border=6>"
+	for(i=0 ; i<library.length ;i++)
+	{
+		ress+="<tr><td>"+library[i].author+"</td><td>"+library[i].title+"</td><td>"+library[i].libraryID+"</td></tr>";
+	}
+	ress+="</table>";
+	document.getElementById("d").innerHTML=res;
+
+}
+
+</script>
+
+</head>
+
+<body style="background-color:green" align="center">
+
+enter your text<input type="text" id="1"> 
+<button id="3" onclick="dash()">dash</button>
+<button id="3" onclick="mostfrequentitem()">most-frequent-item</button>
+<br><br><br>
+eter your char to search<input type="text" id="5">
+<button id="4" onclick="secondindexof()">second-index-of</button>
+<br>
+<button id="5" onclick="removedublicate()">removedublicate</button>
+<p id="2"> </p>
+<input type="text" id="t1">
+<input type="text" id="t2"><br><br>
+
+<button  onclick="sortt()">sorttttt</button><br>
+<p id="e"></p><br>
+<p id="d"></p>
+
+</body>
+
+</html>

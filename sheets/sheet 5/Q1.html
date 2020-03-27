@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>
+            This is first header
+        </h1>
+        <p>
+        jlfjldsjfljflsdljfldjl
+            dl;kfsks
+        </p>
+        <h1>
+            This is second header
+        </h1>
+        
+        <p>
+            nsdklfdsfsdkfjklf
+        </p>
+        <h1>
+            This is the third header
+        </h1>
+        
+        <input type="button" value="Change" onclick="change()">
+        
+        <script type="text/javascript">
+            function change()
+            {
+                var hh = document.getElementsByTagName("h1");
+                for (i=0 ; i<hh.length ; i++)
+                {
+                    hh[i].innerHTML = "New Header after Change";
+                      
+                }
+            }
+        </script>
+     </body>
+</html>

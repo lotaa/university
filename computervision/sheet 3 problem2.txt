@@ -1,0 +1,30 @@
+I = imread('cameraman.tif');
+X = imbinarize(I);
+L = bwlabel(X,4);
+subplot(121); imshow(L);
+subplot(122); imshow(X);
+
+[r,c] = size(X);
+T = zeros(r,c);
+
+for i = 1:r
+    for j = 1:c
+   T(i,j)= X(i,j);     
+    end
+end
+
+for i = 2:r-1
+    for j = 2:c-1
+       if isequal( X(i,j), X(i,j+1), X(i+1,j),X(i+1,j+1) )
+              T(i,j) = X(i,j)+1;
+              T(i,j+1) = X(i,j)+1;
+              T(i+1,j) = X(i,j)+1;
+              T(i+1,j+1) = X(i,j)+1;
+       else
+           T(i,j) = X(i,j);
+       end
+     end
+end
+figure
+subplot(121); imshow(T,[]);
+subplot(122); imshow(X);

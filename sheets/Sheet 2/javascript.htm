@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+    <html>
+        
+        <head>
+            <title>sheet 2</title>
+        </head>
+        
+        <body style="background-color: gray ; color:gold;"  align=center>
+            
+           
+                <h1 align=center style="">REGESTRAION FORM </h1>
+                <br><br>
+                <p id="error"></p>
+                <br><br>
+                enter your name <input type=text id="name"><br><br>
+                enter your e-mail <input type=text id="email"><br><br>
+                <button onclick=check()>check my name</button><br><br>
+                <p>enter your choiss</p>
+                <input type=radio name="q" id="11">samsung<br> 
+                <input type=radio name="q" id="12">iphone<br>
+                enter your quantity <input type="text" id="num"><br><br>
+                <button onclick=submit()>submit order</button>
+            <hr><hr><hr>
+            
+             <P id="2"> </P>
+             <p>********************Simple calculator>********************</p>
+             <hr>
+            x= <input type=text id="0"><br><br>
+            y= <input type=text id="1">
+            <hr>
+            <button onclick="call()">calculate</button>
+            <hr>
+            sum = <p id="3"> </p>
+             <hr>
+            diff =  <p id="4"> </p>
+            <hr>
+            mul =  <p id="5"> </p>
+            <hr>
+            div =  <p id="6"> </p>
+            <hr>
+            mod =  <p id="7"> </p>
+            <hr>
+            
+            <table border=3 align=center>
+                <tr><td  style="background-color:powderblue ; font-size: large" >F(X)</td></tr>
+                <tr><td><img src="fn.png"></td></tr>
+                <tr><td  style="background-color:powderblue">x <input type=text id="i"><br>fx = <p id="c"></p></td></tr>
+                <tr><td  style="background-color:powderblue"><button onclick=check()>calculate</button></td></tr>
+            </table>
+            <br><br>
+            <hr><hr><hr>
+            
+            
+            <script>
+             // document.write("HELLO HTML , CSS , JAVASCRIPT WORLD");
+              document.getElementById("1").innerHTML="HELLO HTML , CSS , JAVASCRIPT WORLD";
+              
+              function submit()
+              {
+                var a1=document.getElementById("name").value;
+                var a2=document.getElementById("email").value;
+                var num=document.getElementById("num").value;
+                var type=document.getElementById("11");
+                var type2=document.getElementById("12");
+                if(a1=="XYZ" && a2=="1234")
+                {
+                    if(type.checked){window.alert("welcom "+a1+" your email= "+a2+"your order is "+num+"from samsung");}
+                    else if(type2.checked){window.alert("welcom "+a1+" your email= "+a2+"your order is "+num+"from iphone");}
+                }
+                else{window.alert("your data is false")}
+              }
+              
+              function check()
+              {
+              var n=document.getElementById("name").value;
+                if(document.getElementById("name").value==""){document.getElementById("error").innerHTML="you shoud enter your name ";}
+                else {window.alert("thanks for regstration "+n);}
+              }
+              
+              function calc()
+              {
+              var a=document.getElementById("i").value;
+                if(a<0){document.getElementById("c").innerHTML=a*a;}
+                else if(a>=1 && a<20){document.getElementById("c").innerHTML=a*a-4;}
+                else if(a>=35 && a<=20){document.getElementById("c").innerHTML=Math.sqrt(a-4)/2*a;}
+                else {document.getElementById("c").innerHTML="undifine";}
+              }
+              
+              function sum()
+              {
+                document.getElementById("3").innerHTML=document.getElementById("0").value*1+document.getElementById("1").value*1;
+              }
+              
+              function sub()
+              {
+               document.getElementById("4").innerHTML=document.getElementById("0").value*1 - document.getElementById("1").value*1;
+              }
+              
+              function mul()
+              {
+                document.getElementById("5").innerHTML=document.getElementById("0").value*document.getElementById("1").value;
+              }
+              
+              function div()
+              {
+                document.getElementById("6").innerHTML=document.getElementById("0").value/document.getElementById("1").value;
+              }
+              
+              function mod()
+              {
+                document.getElementById("7").innerHTML=document.getElementById("0").value%document.getElementById("1").value;
+              }
+              
+              function call()
+              {
+                sum();
+                sub();
+                mul();
+                div();
+                mod();
+              }
+            </script>
+        
+            
+        </body>
+    </html>

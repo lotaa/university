@@ -1,0 +1,61 @@
+#define _MATVALS matrix,row,col
+
+#include <iostream>
+using namespace std;
+
+void fillArr(int arr[][200], int rSize, int cSize);
+void dispArr(int arr[][200], int rSize, int cSize);
+float avgEven(int arr[][200], int rSize,int cSize);
+int maxVArr(int arr[][200], int rSize,int cSize);
+
+void main(){
+	int matrix[200][200],row,col;
+	cout<<"row size:";	cin>>row;
+	cout<<"col size: ";	cin>>col;
+	fillArr(_MATVALS);
+	dispArr(_MATVALS);
+	cout<<avgEven(_MATVALS)<<endl;
+	cout<<maxVArr(_MATVALS)<<endl;
+	system("pause");
+}
+
+void fillArr(int arr[][200], int rSize, int cSize){
+	cout<<"Enter Values of array:-\n";
+	for(int i = 0; i<rSize; i++)
+		for(int j = 0; j<cSize; j++)
+			cin>>arr[i][j];
+}
+
+void dispArr(int arr[][200], int rSize, int cSize){
+	cout<<"Array:-\n";
+	for(int i = 0; i<rSize; i++){
+		for(int j = 0; j<cSize; j++) cout<<arr[i][j]<<" ";
+		cout<<endl;
+	}
+	
+}
+
+float avgEven(int arr[][200], int rSize,int cSize){
+	float sum = 0;
+	int countEvens=0;
+	cout<<"Avreage Of Evens: ";
+	for(int i = 0; i<rSize; i++)
+		for(int j = 0; j<cSize; j++)
+			if(arr[i][j]%2==0){
+				sum+=arr[i][j];
+				countEvens++;
+			}
+	sum /= countEvens;
+	return sum;
+}
+
+int maxVArr(int arr[][200], int rSize, int cSize){
+	cout<<"Max Number: ";
+	int max=arr[0][0];
+	for(int i = 0; i<rSize; i++){
+		for(int j = 0; j<cSize; j++){
+			if(arr[i][j]>max) max = arr[i][j];
+		}
+	}
+	return max;
+}

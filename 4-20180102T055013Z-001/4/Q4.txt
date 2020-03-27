@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Item{
+	string name;
+	int price;
+	static int serial_number;
+public:
+	
+	void set(){
+		cout<<"Item Name: ";	cin>> name;
+		cout<<"Item Price: ";	cin>>price;
+		serial_number++;
+	}
+	void sDisplay(){
+		cout<<"Serial Number: "<<serial_number<<endl;
+	}
+	void display(){
+		cout<<"Item Name: "<< name<<endl;
+		cout<<"Item Price: "<< price<<endl;
+		cout<<"Serial Number: "<<serial_number<<endl<<endl;
+	}
+};
+
+int Item::serial_number=0;
+
+void main(){
+	Item I1,I2,I3;
+	I1.set();
+	I1.display();
+
+	I2.set();
+	I2.display();
+
+	I3.set();
+	I3.display();
+
+	system("pause");
+}

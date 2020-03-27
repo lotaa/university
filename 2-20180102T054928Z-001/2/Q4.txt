@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct student{
+	string name;
+	int age;
+	int score[5];
+	float avreage;
+};
+
+float setScore(int sc[]){
+	float avg=0;
+	for(int i = 0; i<5;i++){
+		cin>>sc[i];
+		avg+=sc[i];
+	}
+	avg = avg/5.0;
+	return avg;
+}
+
+void readStudent(student *stud){
+	cout<<"Name: "		;cin>>stud->name;
+	cout<<"Age: "		;cin>>stud->age;
+	cout<<"Score: ";
+	stud->avreage=setScore(stud->score);//Sets the score and store it's avreage.
+}
+
+void printStudent(student *stud){
+	cout<<"Name: "		;cout<<stud->name<<endl;
+	cout<<"Age: "		;cout<<stud->age<<endl;
+	cout<<"Scores:"		;for(int i=0;i<5;i++) cout<<stud->score[i]<<" ";
+	cout<<"Avreage: "	;cout<<stud->avreage<<endl;
+}
+
+void main(){
+	student omar;
+	student *pOmar = &omar;
+	readStudent(pOmar);
+	printStudent(pOmar);
+system("pause");
+}

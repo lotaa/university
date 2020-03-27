@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+class Matrix{
+	private:
+		float A,B,C,D;
+	public:
+		void Mread(){
+			cout<<"Enter the Matrix values: ";
+			cin>>A>>B>>C>>D;
+		}
+		float determ(){
+			return A*D-C*B;
+		}
+
+		Matrix inverse(){
+			Matrix m;
+			float adj;
+			m.A = D/determ();
+			m.D = A/determ();
+			m.C= -1*C/determ();
+			m.B= -1*B/determ();
+			return m;
+		}
+		void print(){
+			cout<<endl<<"|"<<A<<"\t"<<B<<"|"<<endl<<"|"<<C<<"\t"<<D<<"|"<<endl;
+		}
+};
+
+
+void main(){
+	Matrix mat;
+	
+	mat.Mread();
+	mat.print();
+	cout<<mat.determ()<<endl;
+	mat.inverse().print();
+	mat.inverse().inverse().print();
+	cout<<endl;
+	system("pause");
+}

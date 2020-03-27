@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+long fact(long n);
+
+void main() {
+	long n, k;
+	float sum;
+	do{
+		cout << "n:";
+		cin >> n;
+	} while (n < 1);
+	cout << "k:";
+	cin >> k;
+	if (n > k && !(n < 1)) {
+		sum =  float(fact(k)) / float((fact(n - k)) * float(fact(n)));
+		cout << sum << endl;
+	}
+	else { cout << "k can NOT be more than n...\n"; }
+	system("pause");
+}
+
+long fact(long n) {
+	if (n < 1) {
+		cout << "Error(0): n can NOT be less than 1...\n";
+		return 0;
+	}
+	else if (n == 1) return 1;
+	else {
+		return n * (fact(n - 1));
+	}
+}

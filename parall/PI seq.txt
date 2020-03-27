@@ -1,0 +1,18 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    const int n = 100000 ;
+    float step = 1.0/n ;
+    float sum=0;
+    float x=0;
+    for(int i=0; i<n; i++)
+    {
+        sum+=(4.0/(1+x*x))*step;
+        x=i*step;
+    }
+    cout<<"pi value = "<<sum<<endl;
+    return 0;
+}

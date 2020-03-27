@@ -1,0 +1,75 @@
+#include <iostream>
+#include<pthread.h>
+#include<vector>
+#include<ctime>
+
+using namespace std;
+
+vector<int> x,y,res ;
+const int numberPthread = 4;
+clock_t t1,t2;
+
+pthread_mutex_t myMut ;
+
+void* myFun(void* p)
+{
+    int t = (int)p;
+    int start, end, len, sum=0;
+    len = x.size() / numberPthread;
+    start = t*len;
+    end = start+ len ;
+
+    for(int i=start; i<end; i++)
+    {
+        pthread_mutex_lock(&myMut);
+        sum += x.at(i) * y.at(i) ;
+        pthread_mutex_unlock(&myMut);
+    }
+    res.push_back(sum);
+}
+
+int main()
+{
+    pthread_mutex_init(&myMut, NULL);
+
+    int dotProd = 0 ;
+    int no = 1000;
+    for(int i=0; i<no; i++)
+    {
+        x.push_back(1);
+        y.push_back(1);
+    }
+
+    pthread_t myPthreads[numberPthread];
+
+    t1 = clock();
+    for(int i=0; i<numberPthread; i++)
+    {
+        pthread_create(&myPthreads[i], NULL, *myFun, (void*)i );
+    }
+
+    for(int i=0; i<numberPthread; i++)
+    {
+        pthread_join(myPthreads[i], NULL);
+    }
+    t2 = clock();
+
+    for(int i=0; i<res.size(); i++)
+    {
+        dotProd += res.at(i);
+        cout<<"vec res at "<<i<<" = "<<res.at(i)<<endl;
+    }
+
+    cout<<"the result of the dot product = "<<dotProd<<endl;
+    cout<<"total time spend = "<<(double)(t2-t1)<<endl;
+
+    for(int i=0; i<numberPthread; i++)
+    {
+        pthread_join(myPthreads[i], NULL);
+    }
+
+
+    pthread_mutex_destroy(&myMut);
+    pthread_exit(NULL);
+    return 0;
+}

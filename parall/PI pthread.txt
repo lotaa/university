@@ -1,0 +1,51 @@
+#include <iostream>
+#include<pthread.h>
+#include<ctime>
+
+using namespace std;
+
+pthread_mutex_t myMut;
+const int threadNumber = 5 ;
+    const int n = 100000 ;
+    float step = 1.0/n ;
+    float sum=0;
+    float x=0;
+void* myFun(void* p)
+{
+    pthread_mutex_lock(&myMut);
+    int t = (int)p;
+    int start, end, len;
+    len = n/threadNumber;
+    start = t*len;
+    end = start+len;
+    for(int i=start; i<end; i++)
+    {
+        sum+=(4.0/(1+x*x))*step;
+        x=i*step;
+    }
+    pthread_mutex_unlock(&myMut);
+}
+
+int main()
+{
+    clock_t t1, t2;
+    pthread_mutex_init(&myMut, NULL);
+
+    pthread_t myThreads[threadNumber] ;
+    t1 = clock();
+    for(int i=0; i<threadNumber; i++)
+    {
+        pthread_create(&myThreads[i], NULL, *myFun, (void*)i);
+    }
+    t2=clock();
+    for(int i=0; i<threadNumber; i++)
+    {
+        pthread_join(myThreads[i], NULL);
+    }
+    
+    cout<<"pi value = "<<sum<<endl;
+    cout<<"total time spend = "<<(double)(t2-t1)<<endl;
+    pthread_mutex_destroy(&myMut);
+    pthread_exit(NULL);
+    return 0;
+}

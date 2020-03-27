@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+class Polygon{
+protected:
+	float Length;
+public:
+	Polygon(float x=0):Length(x){}
+};
+
+class Triangle:public Polygon{
+private:
+	float Height;
+public:
+	Triangle(float x = 0,float y = 0):Polygon(x),Height(y){}
+	
+	float area_t(){
+		return (float(1)/2)*Length*Height;
+	}
+};
+
+class Rectangle:public Polygon{
+private:
+	float Width;
+public:
+	Rectangle(float x = 0,float y = 0):Polygon(x),Width(y){}
+	
+	float area_r(){
+		return Length*Width;
+	}
+};
+
+void main(){
+	Triangle tri(1251, 1342);
+	Rectangle rect(1311, 18);
+
+	cout << "Triangle's Area: " << tri.area_t() << endl;
+	cout << "Rectangle's Area: " << rect.area_r() << endl;
+
+	system("pause");
+}

@@ -1,0 +1,52 @@
+#include <iostream>
+#include<pthread.h>
+#include<ctime>
+
+using namespace std;
+
+pthread_mutex_t myMut;
+
+void* myFun(void* x)
+{
+    pthread_mutex_lock(&myMut);
+
+    int y = (int)x;
+    cout<<"hi from thread : "<<y<<endl;
+
+    pthread_mutex_unlock(&myMut);
+
+    return NULL;
+}
+
+int main()
+{
+    clock_t t1, t2;
+
+    pthread_t myPthreads[5];
+
+    pthread_attr_t myAttr;
+    pthread_attr_init(&myAttr);
+    pthread_attr_setdetachstate(&myAttr, PTHREAD_CREATE_JOINABLE);
+
+
+    pthread_mutex_init(&myMut, NULL);
+
+
+    t1 = clock();
+    for(int i=0; i<5; i++)
+    {
+        pthread_create(&myPthreads[i], &myAttr, *myFun, (void*)i+1);
+    }
+    t2 = clock();
+
+    for(int i=0; i<5; i++)
+    {
+        pthread_join(myPthreads[i], NULL);
+    }
+    cout<<"total time = "<<(double)(t2-t1)<<endl;
+
+    pthread_mutex_destroy(&myMut);
+    pthread_attr_destroy(&myAttr);
+    pthread_exit(NULL);
+    return 0;
+}

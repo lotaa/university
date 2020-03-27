@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+
+class Matrix{
+	int mat[3][3];
+public:
+	Matrix(){
+		for(int i=0;i<3;i++)
+			for(int j=0;j<3;j++)
+				mat[i][j]=0;
+	}
+	
+	void read(){
+		cout<<"Enter 9 Values (3x3): "<<endl;
+		for(int i=0;i<3;i++)
+			for(int j=0;j<3;j++)
+				cin>>mat[i][j];
+	}
+	void print(){
+		cout<<"Mat: "<<endl;
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++)
+				cout<<mat[i][j]<<" ";
+			cout<<endl;
+		}
+		cout<<endl;
+		cout<<endl;
+	}
+	friend class OPER;
+};
+
+class OPER{
+public:
+	int Findmax(Matrix MAT){
+		int max = MAT.mat[0][0];
+		for(int i=0;i<3;i++)
+			for(int j=0;j<3;j++)
+				if(MAT.mat[i][j]>max) max=MAT.mat[i][j];
+		return max;
+	}
+	
+	Matrix sumM(Matrix M1, Matrix M2){
+		Matrix MR;
+			for(int i=0;i<3;i++)
+				for(int j=0;j<3;j++)
+					MR.mat[i][j] = M1.mat[i][j] + M2.mat[i][j];
+		return MR;
+	}
+
+	int compareMax(Matrix M1, Matrix M2){
+		if(Findmax(M1)>Findmax(M2)) return Findmax(M1);
+		else if(Findmax(M1)<Findmax(M2)) return Findmax(M2);
+		else return -1;
+	}
+};
+
+
+void main(){
+	Matrix m1,m2,ms;
+	OPER mc;
+	m1.read();
+	m2.read();
+	ms=mc.sumM(m1,m2);
+	ms.print();
+	cout<<"Max m1: "<<mc.Findmax(m1)<<endl;
+	cout<<"Max m2: "<<mc.Findmax(m2)<<endl;
+
+	cout<<mc.compareMax(m1,m2)<<endl;
+
+	system("pause");
+}

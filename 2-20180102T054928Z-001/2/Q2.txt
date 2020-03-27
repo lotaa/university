@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+bool searCH(char str[], char CH) {
+
+	for (int i = 0; str[i] != '\r'; i++) {
+		if(str[i]==CH){
+			return 1;
+		}
+	}
+	return 0;
+}
+int countchar(char str[], char CH){
+	int counter=0;
+	for (int i = 0; str[i] != '\r'; i++) {
+		if(str[i]==CH){
+			counter++;
+		}
+	}
+	return counter;
+}
+
+void FaR(char str[], char find, char replace){
+	for (int i = 0; str[i] != '\r'; i++) {
+		if(str[i]==find){
+			str[i]=replace;
+		}
+	}
+}
+
+void main() {
+	char mystr[100],ch,chR;
+	cout << "Enter a String: ";
+	cin.get(mystr,100);
+	cout<<"Enter a Char to search for:";
+	cin>>ch;
+	if(searCH(mystr, ch)){
+		cout<<ch<<" Was Found "<<countchar(mystr, ch)<<" Times"<<endl;
+	}
+	cout<<"Find: ";cin>>ch;
+	cout<<"replace: ";cin>>chR;
+	FaR(mystr,ch,chR);
+	cout<<mystr<<endl;
+	system("pause");
+}

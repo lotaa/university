@@ -1,0 +1,41 @@
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+class point_3d{
+	float x,y,z;
+public:
+	void set(){
+		cout<<"Enter the points X,Y,Z: ";
+		cin>>x>>y>>z;
+	}
+	
+	float norm(){
+		return sqrt(x*x + y*y + z*z);			
+	}
+	
+	friend float distanceP(point_3d A,point_3d B){
+		return sqrt(pow((B.x-A.x),2) + pow((B.y-A.y),2) + pow((B.z-A.z),2));
+	}
+
+	friend float maxnorm(point_3d A,point_3d B){
+		if(A.norm()>B.norm()) return A.norm();
+		else if(A.norm()<B.norm()) return B.norm();
+		else return -1;
+	}
+};
+
+
+void main(){
+	point_3d p1,p2;
+
+	p1.set();
+	p2.set();
+
+	cout<<distanceP(p1,p2)<<endl;
+	cout<<maxnorm(p1,p2)<<endl;
+
+	system("pause");
+
+}

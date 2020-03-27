@@ -1,0 +1,35 @@
+#include <iostream>
+#include<vector>
+#include<ctime>
+#include<omp.h>
+
+using namespace std;
+
+int main()
+{
+	clock_t t1, t2;
+	double wt1, wt2;
+
+	t1 = clock();
+	wt1 = omp_get_wtime();
+
+	const int n = 100000;
+	float step = 1.0 / n;
+	float x = 0;
+	float sum = 0;
+	#pragma omp parallel for reduction(+:sum) reduction(+:x)
+	{
+		for (int i=0; i<n; i++)
+		{
+			sum += (4.0 / (1 + x * x)) * step;
+			x = i * step;
+		}
+	}
+	cout << "the PI value = " << sum << endl;
+	t2 = clock();
+	wt2 = omp_get_wtime();
+	cout << "total CPU time = " << (double)(t2 - t1) / CLOCKS_PER_SEC << endl;
+	cout << "total world time = " << wt2 - wt1 << endl;
+
+	return 0;
+}

@@ -1,0 +1,14 @@
+ssn,phone,name,address,sex
+99887766554433,01212121212,"aya amr","15st abassya",female
+11223344556677,01111111111,"aya mohamed","12st abassya",female
+887744556611,01222222222,"amr ahmed","1st shobra",male
+22334455667788,01500000000,"amr amr","20st abassya",male
+66554433221100,012356255555,"ahmed amr","10st shobra",male
+11111110000000,22002200,"mohamed amr","20st shobra",male
+22222223333333,22222222,"doaa ahmed","12st abassya",female
+44444445555555,32323232,"esraa mohamed","10st shobra",female
+66666665555555,01211111111,"marwa amr","20st abassya",female
+77777778888888,22222211,"sara ibrahem","10st shobra",female
+44445555555555,01112121212,"amr mohamed","1st abassya",male
+NULL,,NULL,NULL,NULL
+NULL,NULL,NULL,,NULL

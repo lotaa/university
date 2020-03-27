@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+        function testEven()
+        {
+            var num = document.getElementById("no").value;
+//            var num=window.prompt("Enter a number");
+
+            var result = [num[0]];
+  
+            for(let x=1; x<num.length; x++)
+              {
+                if((num[x-1]%2 == 0)&&(num[x]%2 == 0))
+                 {
+                  result.push('-');
+                  result.push(num[x]);
+                 }
+                else
+                 {
+                  result.push(num[x]);
+                 }
+              }
+//            alert(result.join(""));
+            document.getElementById("out").value=result.join("");
+        }
+    </script>
+</head>
+<body>
+    <form>
+        Enter a number <input type="text" id="no">
+        <br>
+        <input type="button" value="Test Even" onclick="testEven()">
+        <br>
+        <output id="out"></output>
+    </form>
+</body>
+</html>
+
+
+
+

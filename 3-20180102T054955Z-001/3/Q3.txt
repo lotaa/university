@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+class Ratio{
+	private:
+		int n,d;
+	public:
+		void Rget(){
+			cout<<"Enter n,d: ";
+			cin>>n>>d;
+		}
+		float convert(){
+			return float(n)/d;
+		}
+		void Rprint(){
+			cout<<n<<"/"<<d<<endl;
+		}
+		void inverse(){
+			n+=d;
+			d=n-d;
+			n-=d;
+		}
+
+};
+
+void main(){
+	Ratio ratio;
+	ratio.Rget();
+	cout<<ratio.convert()<<endl;
+	ratio.Rprint();
+	ratio.inverse();
+	cout<<ratio.convert()<<endl;
+	system("pause");
+}

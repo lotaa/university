@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript">
+        var ar = new Array();
+        var i =0;
+        function check()
+        {
+            var m = document.getElementById("in").value;
+            var result = "+20-";
+            for (i=1 ; i<m.length ; i++)
+                {
+                    if (i==3 || i==6)
+                        result += m[i] + "-";
+                    else
+                        result += m[i];
+                }
+            document.getElementById("out").value= result;
+        }
+
+    </script>
+    </head>
+    <body>
+        <form>
+            Enter your mobile No.: <input type="number" id="in">
+            <input type="button" onclick="check()" 
+                   value="Check your Number">
+            <br>
+            This is your No.: <output id="out" style="color: blue; background-color: yellow">     </output>
+        </form>
+    </body>
+</html>

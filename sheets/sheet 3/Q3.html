@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript">
+        var ar = new Array();
+        var i =0;
+        function insert()
+        {
+            var x = document.getElementById("n").value;
+            ar[i++] = x;            
+            document.getElementById("msg").innerHTML=" Inserting the value " + x + " array length now = " + ar.length;
+            document.getElementById("n").value = "";
+        }
+        function disp()
+        {
+            var result ="";
+            for (j=0 ; j<ar.length ; j++)
+                result += ar[j] + ", ";
+            document.getElementById("out").value = result;
+        }
+        function neg()
+        {
+            var result ="";
+            for (j=ar.length-1 ; j>=0 ; j--)
+                if (ar[j] <0)
+                    break;
+            if (j>=0)
+                result = "The last -ve element is in index " + j;
+            else
+                result = "The array has no -ve values";
+            document.getElementById("out").value = result;
+        }        
+    </script>
+    </head>
+    <body>
+        <form>
+            <input type="number" id="n">
+            <input type="button" onclick="insert()" value="insert">
+            <input type="button" onclick="disp()" value="show">            
+            <input type="button" onclick="neg()" value="last -ve element">            
+            <br>
+            <p id ="msg">  </p>
+            <br>
+            <output id="out">
+            
+            </output>
+    </form>
+    </body>
+</html>

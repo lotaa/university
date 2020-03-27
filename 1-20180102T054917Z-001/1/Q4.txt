@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+
+void readArray(int arr[],int limit);
+inline bool isPrime(int num);
+int count_prime(int Arr[], int size);
+
+void main(){
+	int numArr[200], arrSize, vNum;
+	cout<<"Enter array size: "; cin>>arrSize;
+	cout<<"Enter Array values: "; for(int i=0;i<arrSize;i++) cin>> numArr[i];
+	cout<<"Enter another vNum: "; cin>>vNum;
+	readArray(numArr, arrSize);
+	cout<<isPrime(vNum)<<endl;
+	cout<<count_prime(numArr, arrSize)<<endl;
+	system("pause");
+}
+
+void readArray(int arr[],int limit){
+	for(int i=0; i<limit; i++) cout<<arr[i]<<" ";
+	cout<<endl;
+}
+
+inline bool isPrime(int num){
+	if(num<=1){
+		return false;
+	}
+	for(int i = 2; i<(num/2)+1; i++)
+		if(num%i == 0) return false;
+	return true;
+}
+
+int count_prime(int Arr[], int size) {
+	int pSum = 0;
+	for (int k = 0; k < size; k++) {
+		if(isPrime(Arr[k])) pSum++;
+	}
+	return pSum;
+}
+

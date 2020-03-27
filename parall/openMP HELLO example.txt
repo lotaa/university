@@ -1,0 +1,29 @@
+#include<iostream>
+#include<omp.h>
+#include<ctime>
+using namespace std;
+
+int main()
+{
+	int numberOfThreads, threadNumber;
+	clock_t t1, t2;
+	double wt1, wt2;
+	t1 = clock();
+	wt1 = omp_get_wtime();
+	#pragma omp parallel num_threads(6) default(shared) private(id)
+	{
+		threadNumber = omp_get_thread_num();
+		
+		#pragma omp single
+		{
+			numberOfThreads = omp_get_num_threads();
+		}
+		cout << "hello from thread : " << threadNumber << " out of : " << numberOfThreads << endl;
+	}
+	t2 = clock();
+	wt2 = omp_get_wtime();
+	cout << "total CPU time = " << (double)(t2 - t1)/CLOCKS_PER_SEC << endl;
+	cout << "total world time = " <<wt2 - wt1<< endl;
+
+	return 0;
+}

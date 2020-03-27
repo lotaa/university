@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+    <html>
+        <head>
+            <title>sheet 3</title>
+            <script>
+                var num=5;
+                var arr=[];
+                var i=0;
+                var neg=0;
+                function insert()
+                {
+                   arr[i]=document.getElementById("2").value;
+                   i++;
+                   document.getElementById("2").value=" ";
+                   window.alert("sucsifuly insertion  : "+arr[i-1]);
+                }
+                function show()
+                {
+                    document.getElementById("1").innerHTML=arr.toString();
+                }
+                  /*  function getneg()
+                    {
+                        for(var j=0;j<i;j++)
+                        {
+                            if(arr[j]<0)
+                            {
+                                if(arr[j]<neg)
+                                {
+                                    neg=arr[j];
+                                }
+                            }
+                        }
+                        if(neg==0)
+                        {
+                            document.getElementById("1").innerHTML="error";
+                        }
+                        else
+                        {
+                             document.getElementById("1").innerHTML=neg;
+                        }
+                    }*/
+                    
+                function firstneg()
+                {
+                    for(var j=0;j<i;j++)
+                    {
+                        if(arr[j]<0)
+                        {
+                                neg=arr[j];break;
+                        }
+                    }
+                    if(neg==0)
+                    {
+                        document.getElementById("1").innerHTML="error";
+                    }
+                    else
+                    {
+                         document.getElementById("1").innerHTML=neg;
+                    }
+                }
+                
+                function lastneg()
+                {
+                    neg2=0;
+                    for( j=arr.length;j>=0;j--)
+                    {
+                        if(arr[j]<0)
+                        {                          
+                                neg2=arr[j];break;
+                        }
+                    }
+                    if(neg2==0)
+                    {
+                        document.getElementById("1").innerHTML="error";
+                    }
+                    else
+                    {
+                         document.getElementById("1").innerHTML=neg;
+                    }
+                }
+            
+           /* function secbig()
+            {
+                arr.sort().reverse();
+                document.getElementById("1").innerHTML=arr[arr.length-2];
+            }*/
+            
+            function firstnele( x=document.getElementById("3").value)
+            {
+                var e=" ";
+                for(var q=0;q<x;q++)
+                {
+                    e+=arr[q]+",";
+                }
+                document.getElementById("1").innerHTML=e;
+            }
+            
+            function testprime()
+            {
+                var f,i,e=" err = ";
+                for(var x=0;x<arr.length();x++)
+                {
+                    if(arr[x]==2)
+                    {
+                        e+=arr[x];
+                    }
+                    else if(arr[x]>2)
+                    {
+                         f=0;
+                        for(i=2;i<arr[i]-1;i++)
+                            {
+                                if(arr[x]%i==0)f=1;break;
+                            }
+                        if(f==0) e+=arr[x];
+                    }
+                }
+                document.getElementById("1").innerHTML=e;
+            }
+            
+            function mob()
+            {
+            var e;
+            e=document.getElementById("4").value;
+                document.getElementById("1").innerHTML="+20"+e[0]+e[1]+e[2]+"-"+e[3]+e[4]+e[5]+"-"+e[6]+e[7]+e[8]+"-"+e[9]+e[10];   
+            }
+            
+            function drawtable()
+            {
+                
+            }
+            </script>
+        </head>
+        <body style="background-color: green" align="center">
+             <input type="text" id="2">
+             <button onclick="insert()">insert</button>
+             <button onclick="show()">show</button>
+             <button onclick="firstneg()">first negative</button>
+             <button onclick="lastneg()">last negative</button>
+             <button onclick="secbig()">second big</button>
+             <button onclick="firstnele()">first Nth element</button>
+             <button onclick="testprime()">test prime</button>
+             <button onclick="mob()">mobile no.</button>
+             <button onclick="drawtable()">mobile no.</button>
+             <p id="1"> </p>
+             <br>enter n number <input id="3" type="text">
+             <br>input phone no <input type="text" id="4">
+        </body>
+    </html>

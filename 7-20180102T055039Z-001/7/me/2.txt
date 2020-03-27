@@ -1,0 +1,43 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+class x_ax{
+protected :
+	float x ;
+public :
+	x_ax (){
+		cout << " enter x point \n " ; cin >> x ;
+	}
+};
+class y_ax{
+protected :
+	float y ;
+public :
+	y_ax (){
+		cout << " enter y point \n " ; cin >>y ;
+	}
+};
+class point_3d : protected x_ax , y_ax{
+private :
+	float z ;
+public :
+	point_3d (){
+		cout << " enter z point \n " ; cin >> z ;
+	}
+	double norm (){
+		return sqrt(x*x + y*y +z*z ) ;
+	}
+	friend float distance(point_3d, point_3d) ;
+};
+ float distance (point_3d p1 , point_3d p2 ){
+	 return sqrt( pow((p2.x-p1.x),2) + pow((p2.y-p1.y),2) +pow((p2.z-p1.z),2) ) ;
+ }
+void main(){
+	point_3d n1 ;
+	cout << " dif btwn orgin is " << n1.norm() << "\n" ;
+	point_3d n2 ;
+	cout << " dif btwn orgin is " << n2.norm() << "\n" ;
+	cout << " //////////////////////// \n " ;
+	cout << " dif btwn 2 points " <<distance(n1 ,n2)<< endl ;
+	system("pause");
+}

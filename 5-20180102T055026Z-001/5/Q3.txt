@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+class Complex;
+class Ratio{
+	int n,d;
+public:
+	void input(){
+		cout<<"Enter n,d: ";
+		cin>>n>>d;
+	}
+	friend float MultiR(Ratio r1,Ratio r2){
+		return ((float)r1.n/r1.d)*((float)r2.n/r2.d);
+	}
+	friend void print(Ratio r,Complex c);
+};
+
+class Complex{
+	int r,m;
+public:
+	void input(){
+		cout<<"Enter r,m: ";
+		cin>>r>>m;
+	}
+	friend Complex SumC(Complex c1,Complex c2){
+		Complex cr;
+		cr.r=c1.r+c2.r;
+		cr.m=c1.m+c2.m;
+
+		return cr;
+	}
+	friend void print(Ratio r,Complex c);
+};
+void print(Ratio r,Complex c){
+	cout<<"Ratio members: "<<r.n<<"/"<<r.d<<endl;
+	cout<<"Ratio members: ("<<c.r<<","<<c.m<<"i)"<<endl;
+}
+
+
+void main(){
+	Ratio r;
+	Complex c,cs;
+
+	r.input();
+	c.input();
+	cs=SumC(c,c);
+
+	cout<<MultiR(r,r)<<endl;
+	
+	print(r,c);
+	print(r,cs);
+	system("pause");
+}

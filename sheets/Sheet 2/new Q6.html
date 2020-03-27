@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>	
+		<script type="text/javascript">
+			function f1()
+			{
+				//window.alert ("thanks");
+				var n,p,q;
+                n = document.getElementById("nameIn").value;
+			    p = document.getElementById("passIn").value;
+                q = parseInt(document.getElementById("quan").value);
+                
+                //window.alert("quantity = " + (q+3) + "\nName is " + n + "\n password = " + p);
+                if(n!="XYZ")
+                    document.getElementById("nameErr").innerHTML = "not valid user name";
+                else if(p!="1234")
+                    document.getElementById("passErr").innerHTML = "not valid password";
+                else
+                    {
+                        var m;
+                        if (document.getElementById("NT").checked)
+                            m = "Samsung Note5";
+                        else
+                            m = "iPhone 7";
+                        window.alert("Welcome " + n + "\nYou Chose to order " + q + " device devices from " + m);
+                        // OR
+                        //var msg = Welcome " + n + "\nYou Chose to order " + q + " device devices from " + m;
+                        //window.alert(msg);
+                    }
+			}
+		</script>
+	</head>
+		
+	<body>
+		<h1>Ordering form 		</h1>
+		
+		<p id="error">	ppp	</p>
+		<form>
+			Enter your name: <input type="input" name="userName" id="nameIn">
+            <b style="color:red" id="nameErr">   </b>
+			<br>
+			Enter Password: <input type="password" name="pass" id="passIn">
+            <b style="color:red" id="passErr">   </b>
+			<br>		
+			Enter your Choice:
+			<br>
+			<input type="radio" name="mobile" value="Note5" id="NT"> Samsung Note5
+			<br>
+			<input type="radio" name="mobile" value="iPhone7" id="iph"> iPhone 7
+			<br>
+			<br>
+			Enter the Quantity: <input type="number" name="quantity" id="quan" value="1">
+			<br>
+			<input type="button" onclick="f1()" value="Submit order">
+		</form>
+		
+	</body>
+</html>

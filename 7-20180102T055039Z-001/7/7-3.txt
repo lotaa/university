@@ -1,0 +1,38 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+class Shape{
+protected:
+	double Length;
+public:
+	Shape(float x=0):Length(x){}
+};
+
+class Rectangle:public Shape{
+protected:
+	double Width;
+public:
+	Rectangle(double x = 0 ,double y = 0):Shape(x), Width(y){}
+	
+	double area(){
+		return Length*Width;
+	}
+};
+
+class Parallelogram:public Rectangle{
+private:
+	double Height;
+public:
+	Parallelogram(double x = 0, double y = 0, double z = 0): Rectangle(x, y), Height(z){}
+	
+	double area(){
+		return Length*Width*Height;
+	}
+};
+
+void main(){
+	Parallelogram par(5,12,13);
+	cout<< par.area() << endl;
+system("pause");
+}

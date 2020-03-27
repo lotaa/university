@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript">
+		var ar= new Array();
+         function student(d,n,p)
+		 {
+			 this.id=d;
+			 this.Name=n;
+			 this.program=p;
+			 
+			 this.disp=function(){return "  ID :  "+this.id+"     Name : "+this.Name
+					+"    Program :  "+this.program;}
+		 }
+	function insert(){
+		var ids=document.getElementById("i").value;
+		var name=document.getElementById("n").value;
+		 var e = document.getElementById("MySelectOption").value;
+        
+		 
+		var s= new student(ids,name,e);
+		 ar.push(s);
+		
+		
+		
+		var v= confirm("DO you want to insert anther student ????");
+              if(v==true)
+               	document.getElementById("ins").style.visibility="visible";
+                     else
+					document.getElementById("ins").style.visibility="hidden";
+		
+		
+		
+          document.getElementById("i").value="";
+		document.getElementById("n").value="";
+		document.getElementById("MySelectOption").value="";
+        		
+                
+               }
+		 
+		function disp(){
+			var result="";
+			for(var i=0;i<ar.length;i++){
+				result+=ar[i].disp()+"\n";
+			}
+			    document.getElementById("text").innerHTML=result;
+				 
+		}
+		 
+    </script>
+    </head>
+    <body>
+        <form>
+            ID: <input type="number" id="i" value="ID">
+			
+			Name : <input type="text" id="n" value="name">
+			Program : <select  id="MySelectOption">
+			             <option value="CS">CS</option>
+			             <option value="CS-Math">CS-Math</option>
+						 <option value="CS-Stat">CS-Stat</option>
+						 <option value="CS-physics">CS-physics</option>
+			         </select>
+			             
+			           
+            <input type="button" onclick="insert()" value="insert" id="ins">
+			<input type="button" onclick="disp()" value="Show">
+			 
+			<br><br>
+             <textarea rows="10" cols="100" id="text"></textarea>
+            <p id ="msg">  </p>
+            <br>
+            <output id="out"></output>
+			<br><br>
+			<output id="outs"></output>
+			<br>
+            <p id="u"></p>
+            
+    </form>
+		 
+    </body>
+</html>

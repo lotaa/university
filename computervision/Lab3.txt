@@ -1,0 +1,61 @@
+clear;
+ clc;
+
+%%%%%%%%%%%%%%%%% Q1 &&&&&&&&&&&
+% I=imread('cameraman.tif');
+% [r , c]=size(I);
+% freq=zeros(1,255);
+% for i=1:r
+%     for j=1:c
+%         freq(I(i,j)+1)=freq(I(i,j)+1)+1;
+%         
+%     end
+%     
+% end
+% subplot(1,2,1)
+% imhist(I);
+% subplot(1,2,2);
+% bar(freq);
+%%%%%%%%%%%%%%%%%%%%%%% Q2 %%%%%%%%%%%%%
+% I=imread('pout.tif');
+% figure
+% imshow(I)
+% y = uint8(floor(double(I)/2));
+% figure, imshow(y,[]);
+% w=min(min(y));
+% n=max(max(y));
+
+%%%%%%%%%%%%%%%%%%% Q3 average %%%%%%%%%%%
+% I=imread('pout.tif');
+% J=imread('pout.tif');
+% imsum=double(I);
+% imsum=imsum+double(J);
+% immean=imsum/2;
+% imshow(immean,[]);
+%%%%%%%%%%%%%%%%%%%% Q3 adding %%%%%%%%%%
+% I=imread('pout.tif');
+% J=imread('pout.tif');
+% c=imadd(I,J);
+% imshow(c,[]);
+
+%%%%%%%%%%%%%%%%%%%% Q3 subtracting %%%%%%%%%%
+% I=imread('pout.tif');
+% J=imread('pout.tif');
+% c=imsubtract(I,J);
+% imshow(c,[]);
+
+%%%%%%%%%%%%%%%%%%%% problem 1 And Or %%%%%%
+% A=imread('cameraman.tif');
+% C=zeros(size(A));
+% for x= 100: 200
+%     for y=100: 200
+%         C(x,y)=255;
+%     end
+% end
+% C=uint8(C);
+% and=bitand(A,C);
+% or=bitor(A,C);
+% subplot(1,2,1);
+% imshow(and,[]);
+% subplot(1,2,2);
+% imshow(or,[]);

@@ -1,0 +1,50 @@
+ <!DOCTYPE HTML>
+ <html>
+ <head>
+ 	<script type="text/javascript">
+ 		function convert()
+ 		{
+ 			x=document.getElementsByTagName("h1");
+ 			for(i=0;i<x.length;i++)
+ 			{
+ 				x[i].innerHTML="new ym3lm"
+ 			}
+ 		}
+
+
+ 		function clic()
+ 		{
+ 			x=document.getElementById("id").value;
+ 			y=document.getElementById("name").value;
+ 			z=document.getElementById("program").value;
+ 			w={"id":x,"name":y,"program":z};
+ 			var arr=[];
+ 			arr.push(w);
+ 			alert(w);
+ 		}
+
+
+ 	</script>
+ </head>
+ <body>
+ 	<h1>asim</h1>
+ 	<h1>issam</h1>
+ 	<h1>farhat</h1>
+ 	<h1>asim</h1>
+ 	<button onclick="convert()">convert</button>
+
+ 	<br><br><br>
+    ID: <input type="text" id="id">&nbsp&nbsp&nbsp
+	NAME: <input type="text" id="name">&nbsp&nbsp&nbsp
+	PROGRAM : <select id="program">
+					<option value="cs">CS</option>
+					<option value="cs-math">CS-MATH</option>
+					<option value="cs-static">CS-STATIC</option>
+					<option value="cs-physics">CS-PHYSICS</option>
+			  </select>
+	<br><br><br>
+
+<button onclick="clic()">get data</button>
+
+ </body>
+ </html>

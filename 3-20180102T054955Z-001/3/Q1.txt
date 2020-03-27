@@ -1,0 +1,38 @@
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+class Point{
+	private:
+		float x,y,z;
+
+	public:
+		void set(){
+			cout<<"Enter the point (x, y, z): ";
+			cin>>x>>y>>z;
+		}
+		void print(){
+			cout<<"("<<x<<", "<<y<<", "<<z<<")";
+			cout<<endl;
+		}
+		void anegate(){
+			x=-x;
+			y=-y;
+			z=-z;
+			print();
+		}
+		float norm(){
+			return sqrt(pow(x,2)+pow(y,2)+pow(z,2));
+		}
+
+};
+
+void main(){
+	Point p1;
+	p1.set();
+	p1.print();
+	cout<<p1.norm()<<endl;
+	p1.anegate();
+	system("pause");
+}

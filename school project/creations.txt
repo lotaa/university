@@ -1,0 +1,459 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema school
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema school
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `school` DEFAULT CHARACTER SET latin1 ;
+USE `school` ;
+
+-- -----------------------------------------------------
+-- Table `school`.`class`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `school`.`class` ;
+
+CREATE TABLE IF NOT EXISTS `school`.`class` (
+  `no` VARCHAR(5) NOT NULL,
+  `location` VARCHAR(45) NULL,
+  `range` VARCHAR(45) NULL,
+  PRIMARY KEY (`no`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `school`.`student`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `school`.`student` ;
+
+CREATE TABLE IF NOT EXISTS `school`.`student` (
+  `ssn` CHAR(14) NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `address` VARCHAR(45) NULL,
+  `year` INT NULL,
+  `birhdate` DATE NULL,
+  `phone` INT NULL,
+  `sex` VARCHAR(45) NULL,
+  `class_no` VARCHAR(5) NULL,
+  PRIMARY KEY (`ssn`),
+  INDEX `fk_student_class` (`class_no` ASC),
+  CONSTRAINT `fk_student_class`
+    FOREIGN KEY (`class_no`)
+    REFERENCES `school`.`class` (`no`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `school`.`employee`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `school`.`employee` ;
+
+CREATE TABLE IF NOT EXISTS `school`.`employee` (
+  `ssn` BIGINT(20) NOT NULL,
+  `phone` BIGINT(20) NULL,
+  `name` VARCHAR(45) NULL,
+  `address` VARCHAR(45) NULL,
+  `sex` VARCHAR(45) NULL,
+  PRIMARY KEY (`ssn`),
+  UNIQUE INDEX `ssn_UNIQUE` (`ssn` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `school`.`subject`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `school`.`subject` ;
+
+CREATE TABLE IF NOT EXISTS `school`.`subject` (
+  `name` VARCHAR(45) NOT NULL,
+  `no` INT NOT NULL,
+  `min_degree` VARCHAR(45) NULL,
+  `max_degree` VARCHAR(45) NULL,
+  PRIMARY KEY (`no`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `school`.`teacher`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `school`.`teacher` ;
+
+CREATE TABLE IF NOT EXISTS `school`.`teacher` (
+  `hours per week` FLOAT NOT NULL,
+  `employee_ssn` BIGINT(20) NOT NULL,
+  `subject_no` INT NOT NULL,
+  INDEX `fk_teacher_employee1_idx` (`employee_ssn` ASC),
+  PRIMARY KEY (`employee_ssn`),
+  INDEX `fk_teacher_subject1_idx` (`subject_no` ASC),
+  CONSTRAINT `fk_teacher_employee1`
+    FOREIGN KEY (`employee_ssn`)
+    REFERENCES `school`.`employee` (`ssn`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_teacher_subject1`
+    FOREIGN KEY (`subject_no`)
+    REFERENCES `school`.`subject` (`no`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `school`.`dependent`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `school`.`dependent` ;
+
+CREATE TABLE IF NOT EXISTS `school`.`dependent` (
+  `ssn` BIGINT(20) NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `relationship` VARCHAR(45) NULL,
+  `phone` VARCHAR(45) NULL,
+  `student_ssn` CHAR(14) NOT NULL,
+  PRIMARY KEY (`ssn`, `student_ssn`),
+  INDEX `fk_dependent_student1` (`student_ssn` ASC),
+  CONSTRAINT `fk_dependent_student1`
+    FOREIGN KEY (`student_ssn`)
+    REFERENCES `school`.`student` (`ssn`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `school`.`grade`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `school`.`grade` ;
+
+CREATE TABLE IF NOT EXISTS `school`.`grade` (
+  `no` INT NOT NULL,
+  `type` VARCHAR(45) NULL,
+  `student_ssn` CHAR(14) NOT NULL,
+  INDEX `fk_grade_student1` (`student_ssn` ASC),
+  PRIMARY KEY (`student_ssn`),
+  CONSTRAINT `fk_grade_student1`
+    FOREIGN KEY (`student_ssn`)
+    REFERENCES `school`.`student` (`ssn`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `school`.`study`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `school`.`study` ;
+
+CREATE TABLE IF NOT EXISTS `school`.`study` (
+  `student_ssn` CHAR(14) NOT NULL,
+  `subject_no` INT NOT NULL,
+  `degree` VARCHAR(45) NULL,
+  PRIMARY KEY (`student_ssn`, `subject_no`),
+  INDEX `fk_student_has_subject_student1` (`student_ssn` ASC),
+  INDEX `fk_student_has_subject_subject1` (`subject_no` ASC),
+  CONSTRAINT `fk_student_has_subject_student1`
+    FOREIGN KEY (`student_ssn`)
+    REFERENCES `school`.`student` (`ssn`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_student_has_subject_subject1`
+    FOREIGN KEY (`subject_no`)
+    REFERENCES `school`.`subject` (`no`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `school`.`manger`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `school`.`manger` ;
+
+CREATE TABLE IF NOT EXISTS `school`.`manger` (
+  `start_date` INT NULL,
+  `employee_ssn` BIGINT(20) NOT NULL,
+  INDEX `fk_manger_employee1_idx` (`employee_ssn` ASC),
+  UNIQUE INDEX `employee_ssn_UNIQUE` (`employee_ssn` ASC),
+  PRIMARY KEY (`employee_ssn`),
+  CONSTRAINT `fk_manger_employee1`
+    FOREIGN KEY (`employee_ssn`)
+    REFERENCES `school`.`employee` (`ssn`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `school`.`worker`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `school`.`worker` ;
+
+CREATE TABLE IF NOT EXISTS `school`.`worker` (
+  `specialization` VARCHAR(45) NULL,
+  `employee_ssn` BIGINT(20) NOT NULL,
+  INDEX `fk_worker_employee1_idx` (`employee_ssn` ASC),
+  UNIQUE INDEX `employee_ssn_UNIQUE` (`employee_ssn` ASC),
+  PRIMARY KEY (`employee_ssn`),
+  CONSTRAINT `fk_worker_employee1`
+    FOREIGN KEY (`employee_ssn`)
+    REFERENCES `school`.`employee` (`ssn`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `school`.`teach2`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `school`.`teach2` ;
+
+CREATE TABLE IF NOT EXISTS `school`.`teach2` (
+  `class_no` VARCHAR(5) NOT NULL,
+  `teacher_employee_ssn` BIGINT(20) NULL,
+  PRIMARY KEY (`class_no`, `teacher_employee_ssn`),
+  INDEX `fk_class_has_teacher_teacher1_idx` (`teacher_employee_ssn` ASC),
+  INDEX `fk_class_has_teacher_class1_idx` (`class_no` ASC),
+  CONSTRAINT `fk_class_has_teacher_class1`
+    FOREIGN KEY (`class_no`)
+    REFERENCES `school`.`class` (`no`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_class_has_teacher_teacher1`
+    FOREIGN KEY (`teacher_employee_ssn`)
+    REFERENCES `school`.`teacher` (`employee_ssn`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Data for table `school`.`class`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `school`;
+INSERT INTO `school`.`class` (`no`, `location`, `range`) VALUES ('1/5', 'first floar', '30');
+INSERT INTO `school`.`class` (`no`, `location`, `range`) VALUES ('1/3', 'second floar', '30');
+INSERT INTO `school`.`class` (`no`, `location`, `range`) VALUES ('2/5', 'first floar', '25');
+INSERT INTO `school`.`class` (`no`, `location`, `range`) VALUES ('3/5', 'first floar', '25');
+INSERT INTO `school`.`class` (`no`, `location`, `range`) VALUES ('3/2', 'third floar', '25');
+INSERT INTO `school`.`class` (`no`, `location`, `range`) VALUES ('4/2', 'third floar', '20');
+INSERT INTO `school`.`class` (`no`, `location`, `range`) VALUES ('4/3', 'second floar', '20');
+INSERT INTO `school`.`class` (`no`, `location`, `range`) VALUES ('4/5', 'first floar', '20');
+INSERT INTO `school`.`class` (`no`, `location`, `range`) VALUES ('6/5', 'first floar', '25');
+INSERT INTO `school`.`class` (`no`, `location`, `range`) VALUES ('3/4', 'third floar', '25');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `school`.`student`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `school`;
+INSERT INTO `school`.`student` (`ssn`, `name`, `address`, `year`, `birhdate`, `phone`, `sex`, `class_no`) VALUES ('12345678912345', 'ahmed mohamed', '12st shobra', 1, '2010-12-21', 22222222, 'male', '1/5');
+INSERT INTO `school`.`student` (`ssn`, `name`, `address`, `year`, `birhdate`, `phone`, `sex`, `class_no`) VALUES ('1234567891111', 'mohamed ahmed', '23st massra', 1, '2010-11-12', 21111111, 'male', '1/3');
+INSERT INTO `school`.`student` (`ssn`, `name`, `address`, `year`, `birhdate`, `phone`, `sex`, `class_no`) VALUES ('1234567892222', 'aya mohamed', '2st kholosy', 2, '2009-02-23', 23222222, 'female', '2/5');
+INSERT INTO `school`.`student` (`ssn`, `name`, `address`, `year`, `birhdate`, `phone`, `sex`, `class_no`) VALUES ('1234567893333', 'marwa ahmed', '19st massra', 3, '2008-03-12', 24555555, 'female', '3/5');
+INSERT INTO `school`.`student` (`ssn`, `name`, `address`, `year`, `birhdate`, `phone`, `sex`, `class_no`) VALUES ('1234567894444', 'omnia hossn', '3st shobra', 3, '2008-04-15', 33665544, 'female', '3/2');
+INSERT INTO `school`.`student` (`ssn`, `name`, `address`, `year`, `birhdate`, `phone`, `sex`, `class_no`) VALUES ('1234567895555', 'marwa yousif', '3st kholosy', 4, '2007-05-25', 32654987, 'female', '4/2');
+INSERT INTO `school`.`student` (`ssn`, `name`, `address`, `year`, `birhdate`, `phone`, `sex`, `class_no`) VALUES ('1234567896666', 'marina kamel', '16st shobra', 4, '2007-06-30', 33222222, 'female', '4/3');
+INSERT INTO `school`.`student` (`ssn`, `name`, `address`, `year`, `birhdate`, `phone`, `sex`, `class_no`) VALUES ('1234567897777', 'wael ahmed', '10 massra', 1, '2010-08-15', 32156478, 'male', '1/5');
+INSERT INTO `school`.`student` (`ssn`, `name`, `address`, `year`, `birhdate`, `phone`, `sex`, `class_no`) VALUES ('1234567898888', 'mohamed hashem ', '10 massra', 2, '2009-09-24', 332226655, 'male', '2/5');
+INSERT INTO `school`.`student` (`ssn`, `name`, `address`, `year`, `birhdate`, `phone`, `sex`, `class_no`) VALUES ('123456789999', 'yasser ahmed', '45st shobra', 3, '2008-05-06', 222221112, 'male', '3/4');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `school`.`employee`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `school`;
+INSERT INTO `school`.`employee` (`ssn`, `phone`, `name`, `address`, `sex`) VALUES (11887766554433, 01212121212, 'aya amr', '15st abassya', 'female');
+INSERT INTO `school`.`employee` (`ssn`, `phone`, `name`, `address`, `sex`) VALUES (11223344556677, 01111111111, 'aya mohamed', '12st abassya', 'female');
+INSERT INTO `school`.`employee` (`ssn`, `phone`, `name`, `address`, `sex`) VALUES (88774455667788, 01222222222, 'amr ahmed', '1st shobra', 'male');
+INSERT INTO `school`.`employee` (`ssn`, `phone`, `name`, `address`, `sex`) VALUES (22334455667788, 01500000000, 'amr amr', '20st abassya', 'male');
+INSERT INTO `school`.`employee` (`ssn`, `phone`, `name`, `address`, `sex`) VALUES (66554433221100, 012356255555, 'ahmed amr', '10st shobra', 'male');
+INSERT INTO `school`.`employee` (`ssn`, `phone`, `name`, `address`, `sex`) VALUES (11111110000000, 22002200, 'mohamed amr', '20st shobra', 'male');
+INSERT INTO `school`.`employee` (`ssn`, `phone`, `name`, `address`, `sex`) VALUES (22222223333333, 22222222, 'doaa ahmed', '12st abassya', 'female');
+INSERT INTO `school`.`employee` (`ssn`, `phone`, `name`, `address`, `sex`) VALUES (44444445555555, 32323232, 'esraa mohamed', '10st shobra', 'female');
+INSERT INTO `school`.`employee` (`ssn`, `phone`, `name`, `address`, `sex`) VALUES (66666665555555, 01211111111, 'marwa amr', '20st abassya', 'female');
+INSERT INTO `school`.`employee` (`ssn`, `phone`, `name`, `address`, `sex`) VALUES (77777778888888, 22222211, 'sara ibrahem', '10st shobra', 'female');
+INSERT INTO `school`.`employee` (`ssn`, `phone`, `name`, `address`, `sex`) VALUES (44445555555555, 01112121212, 'amr mohamed', '1st abassya', 'male');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `school`.`subject`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `school`;
+INSERT INTO `school`.`subject` (`name`, `no`, `min_degree`, `max_degree`) VALUES ('arabic', 1, '30', '60');
+INSERT INTO `school`.`subject` (`name`, `no`, `min_degree`, `max_degree`) VALUES ('math', 2, '25', '50');
+INSERT INTO `school`.`subject` (`name`, `no`, `min_degree`, `max_degree`) VALUES ('english', 3, '25', '50');
+INSERT INTO `school`.`subject` (`name`, `no`, `min_degree`, `max_degree`) VALUES ('scince', 4, '20', '40');
+INSERT INTO `school`.`subject` (`name`, `no`, `min_degree`, `max_degree`) VALUES ('art', 5, '15', '30');
+INSERT INTO `school`.`subject` (`name`, `no`, `min_degree`, `max_degree`) VALUES ('comp', 6, '15', '30');
+INSERT INTO `school`.`subject` (`name`, `no`, `min_degree`, `max_degree`) VALUES ('religion', 7, '15', '30');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `school`.`teacher`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `school`;
+INSERT INTO `school`.`teacher` (`hours per week`, `employee_ssn`, `subject_no`) VALUES (10, 22334455667788, 6);
+INSERT INTO `school`.`teacher` (`hours per week`, `employee_ssn`, `subject_no`) VALUES (16, 11111110000000, 1);
+INSERT INTO `school`.`teacher` (`hours per week`, `employee_ssn`, `subject_no`) VALUES (18, 22222223333333, 1);
+INSERT INTO `school`.`teacher` (`hours per week`, `employee_ssn`, `subject_no`) VALUES (16, 44444445555555, 2);
+INSERT INTO `school`.`teacher` (`hours per week`, `employee_ssn`, `subject_no`) VALUES (17, 66666665555555, 3);
+INSERT INTO `school`.`teacher` (`hours per week`, `employee_ssn`, `subject_no`) VALUES (16, 777777788888888, 4);
+INSERT INTO `school`.`teacher` (`hours per week`, `employee_ssn`, `subject_no`) VALUES (10, 44445555555555, 7);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `school`.`dependent`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `school`;
+INSERT INTO `school`.`dependent` (`ssn`, `name`, `relationship`, `phone`, `student_ssn`) VALUES (11111122221111, 'ahmed ali', 'father', '01212121212', '12345678912345');
+INSERT INTO `school`.`dependent` (`ssn`, `name`, `relationship`, `phone`, `student_ssn`) VALUES (11111111111122, 'ali mohmaed', 'father', '01235555555', '1234567891111');
+INSERT INTO `school`.`dependent` (`ssn`, `name`, `relationship`, `phone`, `student_ssn`) VALUES (11111111117111, 'ahmed ahmed', 'brother', '01224444444', '1234567892222');
+INSERT INTO `school`.`dependent` (`ssn`, `name`, `relationship`, `phone`, `student_ssn`) VALUES (44444444444444, 'ali amr', 'uncle', '0144444444', '1234567893333');
+INSERT INTO `school`.`dependent` (`ssn`, `name`, `relationship`, `phone`, `student_ssn`) VALUES (11112211111111, 'amr amr', 'father', '01233333333', '1234567894444');
+INSERT INTO `school`.`dependent` (`ssn`, `name`, `relationship`, `phone`, `student_ssn`) VALUES (11116211111111, 'amr ali', 'father', '01525555555', '1234567895555');
+INSERT INTO `school`.`dependent` (`ssn`, `name`, `relationship`, `phone`, `student_ssn`) VALUES (11111111111111, 'ali ali', 'father', '22222222', '1234567896666');
+INSERT INTO `school`.`dependent` (`ssn`, `name`, `relationship`, `phone`, `student_ssn`) VALUES (22222222222222, 'aya ali', 'mother', '01222222222', '1234567897777');
+INSERT INTO `school`.`dependent` (`ssn`, `name`, `relationship`, `phone`, `student_ssn`) VALUES (33333333333333, 'ali ibrahim', 'brother', '01111111111', '1234567898888');
+INSERT INTO `school`.`dependent` (`ssn`, `name`, `relationship`, `phone`, `student_ssn`) VALUES (12312312312312, 'wael ahmed', 'father', '01201222222', '1234567899999');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `school`.`grade`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `school`;
+INSERT INTO `school`.`grade` (`no`, `type`, `student_ssn`) VALUES (1, 'pass', '12345678912345');
+INSERT INTO `school`.`grade` (`no`, `type`, `student_ssn`) VALUES (1, 'pass', '1234567891111');
+INSERT INTO `school`.`grade` (`no`, `type`, `student_ssn`) VALUES (2, 'pass', '1234567892222');
+INSERT INTO `school`.`grade` (`no`, `type`, `student_ssn`) VALUES (3, 'pass', '1234567893333');
+INSERT INTO `school`.`grade` (`no`, `type`, `student_ssn`) VALUES (3, 'pass', '1234567894444');
+INSERT INTO `school`.`grade` (`no`, `type`, `student_ssn`) VALUES (4, 'pass', '1234567895555');
+INSERT INTO `school`.`grade` (`no`, `type`, `student_ssn`) VALUES (4, 'pass', '1234567896666');
+INSERT INTO `school`.`grade` (`no`, `type`, `student_ssn`) VALUES (1, 'pass', '1234567897777');
+INSERT INTO `school`.`grade` (`no`, `type`, `student_ssn`) VALUES (2, 'pass', '1234567898888');
+INSERT INTO `school`.`grade` (`no`, `type`, `student_ssn`) VALUES (3, 'fail', '1234567899999');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `school`.`study`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `school`;
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('12345678912345', 7, '25');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567891111', 7, '20');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567892222', 3, '25');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567893333', 7, '17');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567894444', 1, '60');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567895555', 1, '54');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567896666', 2, '45');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567897777', 1, '40');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567898888', 7, '18');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567899999', 7, '20');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567891111', 1, '55');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567891111', 2, '45');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567891111', 3, '45');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('12345678912345', 3, '28');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('12345678912345', 2, '50');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('12345678912345', 1, '50');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567892222', 2, '30');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567892222', 1, '60');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567892222', 7, '25');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567893333', 1, '53');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567893333', 2, '30');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567893333', 3, '26');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567894444', 3, '27');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567894444', 2, '28');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567894444', 7, '30');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567895555', 2, '26');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567895555', 3, '25');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567895555', 4, '40');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567895555', 5, '30');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567895555', 6, '25');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567895555', 7, '25');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567896666', 7, '24');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567896666', 6, '25');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567896666', 5, '35');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567896666', 4, '35');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567896666', 3, '30');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567896666', 1, '45');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567897777', 7, '26');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567897777', 2, '45');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567897777', 3, '40');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567898888', 3, '45');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567898888', 2, '45');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567898888', 1, '59');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567899999', 1, '58');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567899999', 2, '50');
+INSERT INTO `school`.`study` (`student_ssn`, `subject_no`, `degree`) VALUES ('1234567899999', 3, '50');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `school`.`manger`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `school`;
+INSERT INTO `school`.`manger` (`start_date`, `employee_ssn`) VALUES (2009, 11887766554433);
+INSERT INTO `school`.`manger` (`start_date`, `employee_ssn`) VALUES (2015, 11223344556611);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `school`.`worker`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `school`;
+INSERT INTO `school`.`worker` (`specialization`, `employee_ssn`) VALUES ('cleaning', 88774455667788);
+INSERT INTO `school`.`worker` (`specialization`, `employee_ssn`) VALUES ('saling', 66554433221100);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `school`.`teach2`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `school`;
+INSERT INTO `school`.`teach2` (`class_no`, `teacher_employee_ssn`) VALUES ('1/5', 22334455667788);
+INSERT INTO `school`.`teach2` (`class_no`, `teacher_employee_ssn`) VALUES ('1/3', 11111110000000);
+INSERT INTO `school`.`teach2` (`class_no`, `teacher_employee_ssn`) VALUES ('2/5', 22222223333333);
+INSERT INTO `school`.`teach2` (`class_no`, `teacher_employee_ssn`) VALUES ('3/5', 44444445555555);
+INSERT INTO `school`.`teach2` (`class_no`, `teacher_employee_ssn`) VALUES ('4/2', 66666665555555);
+INSERT INTO `school`.`teach2` (`class_no`, `teacher_employee_ssn`) VALUES ('4/3', 77777778888888);
+INSERT INTO `school`.`teach2` (`class_no`, `teacher_employee_ssn`) VALUES ('2/5', 44445555555555);
+
+COMMIT;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

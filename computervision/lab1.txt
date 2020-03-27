@@ -1,0 +1,48 @@
+clear;
+ clc;
+ %%%%%%%%%%%%%%%% Q1 %%%%%%%%
+%  I=imread('pout.tif');
+%  [r,c]=size(I);
+%  
+%  for i=1:1:r
+%      k=1;
+%      for j=c:-1:1
+%          temp=I(i,k);
+%          result(i,k)=I(i,j);
+%          result(i,j)=temp;
+%          k=k+1;
+%      end
+%  end
+%  subplot(121),imshow(I);
+%  subplot(122),imshow(result);
+  
+ %%%%%%%%%%%%%%%%% Q2 %%%%%%%%%5%55
+ 
+%   I=imread('pout.tif');
+%   [r,c]=size(I);
+%   image_fin=zeros(r,c);
+%   
+%   for i=1:r
+%       for j=1:c
+%           pixel=I(i,j);
+%           if pixel<30
+%               new_pixel=0;
+%           elseif pixel>100
+%               new_pixel=256;
+%           else 
+%               new_pixel=pixel;
+%           end
+%           image_fin(i,j)=new_pixel;
+%       end
+%   end
+%   subplot(121),imshow(I),title("original");
+%  subplot(122),imshow(image_fin,[]);
+
+%%%%%%%%%%%%%%%%%%%%% Q3 %%%%%%%%%%%%%
+I=imread('pout.tif');
+
+subplot(221),imshow(I);
+subplot(222),imshow(I([end:-1:1],:,:));
+subplot(223),imshow(I(:,[end:-1:1],:));
+
+  

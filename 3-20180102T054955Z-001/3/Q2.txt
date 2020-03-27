@@ -1,0 +1,36 @@
+#include <iostream>
+
+using namespace std;
+
+const float PI=3.1415926;
+
+class Circle{
+	private:
+
+		float r;
+	
+	public:
+		void Cread(){
+			cin>>r;
+		}
+		float area(){
+			return PI*r*r;
+		}
+		float circumference(){
+			return 2*PI*r;
+		}
+};
+
+void main(){
+	Circle circle[5];
+	for(int i = 0; i<5; i++){
+		cout<<"Radius of circle "<< i <<": ";
+		circle[i].Cread();
+	}
+
+	for(int i = 0; i<5; i++){
+		cout<<"Area of circle "<< i <<": "<<circle[i].area()<<endl<<endl;
+		cout<<"Circumference of circle "<< i <<": "<<circle[i].circumference()<<endl;
+	}
+	system("pause");
+}

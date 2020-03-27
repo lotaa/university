@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript">
+         
+		function change(){
+			var hh=document.getElementsByTagName("h1");
+			for(var i=0;i<hh.length;i++)
+			{
+				hh[i].innerHTML="New Header After Change ";
+				
+			}
+			
+		}
+    </script>
+    </head>
+    <body>
+        <form>
+           
+			<input type="button" onclick="change()" value="Change">
+			 
+    </form>
+		<h1>This is frist Header</h1>
+		<h1>This is  Seconde Header</h1>
+		<h1>This is  Third Header</h1>
+    </body>
+</html>

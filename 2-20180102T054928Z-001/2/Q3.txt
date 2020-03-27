@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct person{
+	string name;
+	int age;
+	float salary;
+};
+
+void readPerson(person *pers){
+	cout<<"Name: "		;	cin>>pers->name;
+	cout<<"Age: "		;	cin>>pers->age;
+	cout<<"Salary: "	;	cin>>pers->salary;
+}
+void superSalary(person *pers){
+	pers->salary+=10000;
+}
+void printPerson(person *pers){
+	cout<<"\nName: "<<pers->name<<"\tAge: "<<pers->age<<"\t\tSalary:"<<pers->salary<<endl;
+}
+
+void main(){
+	person omar;
+	person *pOmar = &omar;
+	readPerson(pOmar);
+	superSalary(pOmar);
+	printPerson(pOmar);
+system("pause");
+}

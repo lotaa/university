@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript">
+        var ar = new Array();
+        var i =0;
+        function Student (d,n,p)
+        {
+            this.id = d;
+            this.name = n;
+            this.program = p;
+            this.disp = function() { return "ID:" + this.id + " Nmae: " + this.name + " Program: " + this.program;};
+        }
+        
+        function insert() 
+        {
+            var a = document.getElementById("d").value;
+            var b = document.getElementById("name").value;
+            var c = document.getElementById("p").value;
+            var s = new Student (a,b,c);
+            
+            ar.push(s);
+            var conf = confirm("Do you want to Insert Another Student??");
+            if (conf == false)
+                document.getElementById("ins").style.visibility = "hidden";
+            else
+                document.getElementById("ins").style.visibility = "visible";
+                
+            document.getElementById("d").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("p").value = "";
+        }
+        
+        function disp()
+        {
+            var result ="<table border=1>";
+            result += "<th> ID </th> <th> Name </th> <th> Program </th>"
+            for (j=0 ; j<ar.length ; j++)
+            {
+                result += "<tr>"
+                    result += "<td>" + ar[j].id + "</td>";
+                    result += "<td>" + ar[j].name + "</td>";
+                    result += "<td>" + ar[j].program + "</td>";
+                result += "</tr>";
+            }
+            
+            result += "</table>";
+            
+            document.getElementById("msg").innerHTML = result;
+
+//            document.getElementById("out").value = ar;
+        }
+    </script>
+</head>
+<body>
+    <form>
+        ID: <input type="number" id="d">
+        Nmae: <input type="text" id="name">
+        Program: <select id="p">
+            <option value="CS" selected="selected">CS</option>
+            <option value="CS-Math">CS-Math</option>
+            <option value="CS-Stat">CS-Stat</option>
+            <option value="CS-Physics">CS-Physics</option>
+        </select>
+        <input type="button" onclick="insert()" value="insert" id="ins">
+        <input type="button" onclick="disp()" value="show">            
+        
+        <br>
+        <p id ="msg">  
+<!--            <table border="1">
+                <th> ID </th> <th> Name </th> <th> Program </th>
+                <tr>
+                    <td> 1 </td>
+                    <td> aaa </td>
+                    <td> CS </td>
+                </tr>
+            </table>-->
+        </p>
+        <br>
+    </form>
+    </body>
+</html>

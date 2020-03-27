@@ -1,0 +1,50 @@
+help imread
+A=[1 2 3; 4 5 6; 7 8 9]; 
+zeros(n,m)
+ones(n,m)
+eye (n,m) //identity matrix
+[m, n] = size(A) 
+sum(A) 
+sum(sum(A))
+find(‘condition’)  ex: a=find(b==1)// a is array contain all indext of b that contain elements = 1
+plot(x,y)  //plot x data against y data
+figure(k) 
+hold on, hold off //refreshing to add many plots on one figure
+I = imread(‘Pout.tif’);
+imshow(a)
+imagesc(a) //rescales the gray levels to use a specific colormap
+colormap(hot)
+colorbar
+imtool(I)
+imwrite(I,’Pout.tif’) // write image I to file ’Pout.tif’
+imhist(I)
+subplot(1,2,1)
+imresize(a,1.5)
+• im2bw - image to binary
+• im2double - image to double precision
+• im2uint8 - image to 8-bit unsigned integers
+• gray2ind - intensity image to index image
+• ind2gray - indexed image to intensity image
+• mat2gray - matrix to intensity image
+bar(f)
+xlim([0 255]);
+ylim([0 255]);
+bitand(a,b)
+bitor(a,b)
+imnoise(a,'salt & pepper')
+conv2(img,filt);
+histeq(a) // histogram equalization for image a
+cumsum(norm); //cumulitive sum
+bitget(a,1);
+medfilt2(imageWithNoise);
+median(median(imageFilter)) ;
+
+[comp,num]=bwlabel(image,4); //return the conected component
+Measurements=regionprops(comp,'all');
+for k=1:num
+    objArea(k)=Measurements(k).Area;
+    objPerimeter(k)=Measurements(k).Perimeter;
+end
+
+edg=edge(a); // for edge detection
+ 

@@ -1,0 +1,103 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+class Point{
+	private:
+		float x,y,z;
+
+	public:
+		Point():x(0),y(0),z(0){}
+		void set(){
+			cout<<"Enter the point (x, y, z): ";
+			cin>>x>>y>>z;
+		}
+		void print(){
+			cout<<"("<<x<<", "<<y<<", "<<z<<")";
+			cout<<endl;
+		}
+		void anegate(){
+			x=-x;
+			y=-y;
+			z=-z;
+			print();
+		}
+		float norm(){
+			return sqrt(pow(x,2)+pow(y,2)+pow(z,2));
+		}
+
+};
+
+
+class Circle{
+	private:
+		float r, PI;
+	public:
+		Circle():PI(3.1415926), r(0){}
+		
+		void Cread(){
+			cin>>r;
+		}
+		float area(){
+			return PI*r*r;
+		}
+		float circumference(){
+			return 2*PI*r;
+		}
+};
+
+class Ratio{
+	private:
+		int n,d;
+	public:
+		Ratio(int a=0, int b=1):n(a), d(b){}
+		void Rget(){
+			cout<<"Enter n,d: ";
+			cin>>n>>d;
+		}
+		float convert(){
+			return float(n)/d;
+		}
+		void Rprint(){
+			cout<<n<<"/"<<d<<endl;
+		}
+		void inverse(){
+			n+=d;
+			d=n-d;
+			n-=d;
+		}
+
+};
+
+class Matrix{
+	private:
+		float A,B,C,D;
+	public:
+		Matrix(int a=0, int b=0, int c=0, int d=0):A(a), B(b), C(c), D(d) {}
+		void Mread(){
+			cout<<"Enter the Matrix values: ";
+			cin>>A>>B>>C>>D;
+		}
+		float determ(){
+			return A*D-C*B;
+		}
+		bool isSingular(){
+			return (determ() == 0);
+		} 
+
+		Matrix inverse(){
+			Matrix m;
+			m.A = D/determ();
+			m.D = A/determ();
+			m.C= -1*C/determ();
+			m.B= -1*B/determ();	
+			return m;
+		}
+		void print(){
+			cout<<endl<<"|"<<A<<"\t"<<B<<"|"<<endl<<"|"<<C<<"\t"<<D<<"|"<<endl;
+		}
+};
+
+void main(){
+system("pause");
+}

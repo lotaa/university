@@ -1,0 +1,46 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+class shape {
+protected :
+	double lenght ;
+public :
+	shape (){
+		cout << " enter len " << endl ;
+		cin >> lenght ; 
+	}
+};
+class rect : public shape {
+protected : 
+	double width ; 
+public :
+	rect (){
+		cout << " enter width " << endl ; 
+		cin >> width ; 
+	}
+	double area (){
+		return width*lenght ;
+	}
+
+};
+class parllal : public rect {
+private : 
+	double hieght ;
+public : 
+	parllal (){
+		cout << " enter height \n " <<endl ; 
+		cin >> hieght ;
+	}
+	double volume (){
+		return hieght * lenght * width ;
+	}
+};
+void main() {
+	
+	parllal p ;
+	cout << " volume =  " << p.volume() << endl ; 
+	cout << " area =  " << p.area() << endl ; 
+
+	system("pause");
+}
